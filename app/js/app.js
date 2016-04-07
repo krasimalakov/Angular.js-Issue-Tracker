@@ -1,19 +1,19 @@
-var app=angular.module('issueTracker', ['ngRoute']).
+var app=angular.module('IssueTracker', ['ngRoute']).
 
     config(['$routeProvider', function($routeProvider) {
 
         $routeProvider.when('/register', {
-            templateUrl: 'js/templates/register.html',
-            controller: ''
+            templateUrl: 'templates/register.html',
+            controller: 'UserController'
         });
 
         $routeProvider.when('/login', {
-            templateUrl: 'js/templates/login.html',
+            templateUrl: 'templates/login.html',
             controller: ''
         });
 
         $routeProvider.when('/home', {
-            templateUrl: 'js/templates/home.html',
+            templateUrl: 'templates/home.html',
             controller: ''
         });
 
