@@ -1,2 +1,2 @@
 cd app
-node ../scripts/web-server.js
+node ../web-server.js
