@@ -1,6 +1,6 @@
 <form name="loginForm" class="form-horizontal col-lg-5 col-lg-offset-4">
     <fieldset class="text-center">
-        <legend>User registration</legend>
+        <legend>User login</legend>
 
         <div class="form-group">
             <label for="inputUsername" class="col-lg-4 control-label">Username</label>
@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <div class="col-lg-8 col-lg-offset-4">
-                <a href="#/register" type="button" class="btn btn-default">Go to Register</a>
+                <button ng-click="toRegister()" type="button" class="btn btn-default">Go to Register</button>
                 <button type="button" class="btn btn-primary" ng-click="login(user)"
                         ng-disabled="loginForm.$invalid">Login
                 </button>

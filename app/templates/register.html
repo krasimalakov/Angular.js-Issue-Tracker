@@ -74,7 +74,7 @@
 
         <div class="form-group">
             <div class="col-lg-8 col-lg-offset-4">
-                <a href="#/login" type="button" class="btn btn-default">Go to Login</a>
+                <button ng-click="toLogin()" type="button" class="btn btn-default">Go to Login</button>
                 <button type="button" class="btn btn-primary" ng-click="register(user)"
                         ng-disabled="registrationForm.$invalid || user.Password!=user.ConfirmPassword">Register
                 </button>

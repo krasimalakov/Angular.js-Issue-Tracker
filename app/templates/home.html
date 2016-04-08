@@ -1,1 +1,3 @@
-<div ng-include="'templates/login.html'"></div>
+<div ng-if="!authentication.isLogged() && !showRegisterPage" login></div>
+<div ng-if="!authentication.isLogged() && showRegisterPage" register></div>
+<div ng-if="authentication.isLogged()" dashboard></div>
