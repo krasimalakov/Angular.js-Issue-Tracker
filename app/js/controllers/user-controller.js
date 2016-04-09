@@ -38,8 +38,7 @@ app.controller('UserController.Logout', [
     'notify',
     'authentication',
     function ($scope, $location, notify, authentication) {
-        authentication.logout().then(function (message) {
-            notify.showInfo(message);
-            $location.path('/');
-        });
+        authentication.logout();
+        notify.showInfo('User is logout !');
+        $location.path('/');
     }]);

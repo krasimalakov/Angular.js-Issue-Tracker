@@ -29,10 +29,7 @@ app.factory('authentication', [
         }
 
         function logout() {
-            var deferred = $q.defer();
             delete sessionStorage['currentUser'];
-            deferred.resolve('User is logout !');
-            return deferred.promise;
         }
 
         function isLogged() {
