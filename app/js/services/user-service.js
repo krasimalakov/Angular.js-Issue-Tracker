@@ -36,10 +36,46 @@ app.factory('userService', [
             return sessionStorage['currentUser'] != undefined;
         }
 
+        function getCurrentUser() {
+            return JSON.parse(sessionStorage['currentUser']);
+        }
+
+        function setAuthorizationHeaders() {
+            var currentUser = getCurrentUser();
+            if (currentUser) {
+                $http.defaults.headers.common['Authorization'] = 'Bearer ' + currentUser.access_token;
+                $http.defaults.headers.common['Accept'] = 'application/json;odata=verbose';
+            }
+        }
+
+        function getProfile() {
+            setAuthorizationHeaders();
+            var deferred = $q.defer();
+            $http.get(baseUrl + 'me').then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
+        function editProfile(userData) {
+            setAuthorizationHeaders();
+            var deferred = $q.defer();
+            $http.put(baseUrl + 'me', userData).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
         return {
             login: login,
             register: register,
             logout: logout,
-            isLogged: isLogged
+            isLogged: isLogged,
+            getProfile: getProfile,
+            editProfile: editProfile
         }
     }]);

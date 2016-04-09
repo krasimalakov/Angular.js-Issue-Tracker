@@ -1,6 +1,6 @@
 app.directive('register', function () {
     return{
-        templateUrl: 'templates/register.html',
+        templateUrl: 'templates/user/register.html',
         controller: 'UserController.Register'
     }
 });
