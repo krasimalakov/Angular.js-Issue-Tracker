@@ -83,7 +83,7 @@ app.controller('UserController.ChangePassword', [
                 notifyService.showInfo('User change password is successful !');
                 $location.path('/');
             }, function (error) {
-                notifyService.showError('User change password failed !', error);
+                notifyService.showError('User change password failed!', error);
             });
         };
     }]);
