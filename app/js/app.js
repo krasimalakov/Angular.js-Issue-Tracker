@@ -20,7 +20,7 @@ var app = angular.module('IssueTracker', ['ngRoute'])
 
         $routeProvider.when('/profile/password', {
             templateUrl: 'templates/user/change-password.html',
-            controller: ''
+            controller: 'UserController.ChangePassword'
         });
 
         $routeProvider.otherwise({redirectTo: '/'});

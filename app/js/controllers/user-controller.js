@@ -7,6 +7,7 @@ app.controller('UserController.Register', [
     'userService',
     function ($scope, $location, notifyService, userService) {
         $scope.register = function (user) {
+            user.gender = user.gender || 0;
             userService.register(user).then(function (result) {
                 notifyService.showInfo('User registration is successful !');
                 $location.path('/');
@@ -66,6 +67,23 @@ app.controller('UserController.EditProfile', [
                 $location.path('/');
             }, function (error) {
                 notifyService.showError('User profile update failed !', error);
+            });
+        };
+    }]);
+
+app.controller('UserController.ChangePassword', [
+    '$scope',
+    '$location',
+    'notifyService',
+    'userService',
+    function ($scope, $location, notifyService, userService) {
+
+        $scope.changePassword = function (userData) {
+            userService.changePassword(userData).then(function (result) {
+                notifyService.showInfo('User change password is successful !');
+                $location.path('/');
+            }, function (error) {
+                notifyService.showError('User change password failed !', error);
             });
         };
     }]);

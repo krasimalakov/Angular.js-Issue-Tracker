@@ -1,14 +1,14 @@
 'use strict';
 
-app.factory('notifyService',
-    function () {
+app.factory('notifyService', function () {
 
         function showInfo(message) {
             noty({
                     text: message,
                     type: 'info',
                     layout: 'topCenter',
-                    timeout: 1000}
+                    timeout: 1000
+                }
             );
         }
 
@@ -39,9 +39,11 @@ app.factory('notifyService',
                     text: message,
                     type: 'error',
                     layout: 'topCenter',
-                    timeout: 5000}
+                    timeout: 5000
+                }
             );
         }
+
         return {
             showInfo: showInfo,
             showError: showError

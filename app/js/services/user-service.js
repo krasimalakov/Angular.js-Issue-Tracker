@@ -70,12 +70,24 @@ app.factory('userService', [
             return deferred.promise;
         }
 
+        function changePassword(userData) {
+            setAuthorizationHeaders();
+            var deferred = $q.defer();
+            $http.put(baseUrl + 'me/ChangePassword', userData).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
         return {
             login: login,
             register: register,
             logout: logout,
             isLogged: isLogged,
             getProfile: getProfile,
-            editProfile: editProfile
+            editProfile: editProfile,
+            changePassword: changePassword
         }
     }]);
