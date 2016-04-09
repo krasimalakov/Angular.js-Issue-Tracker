@@ -1066,14 +1066,14 @@ angular.mock.dump = function(object) {
        });
 
 
-       it('should fetch authentication token', function() {
+       it('should fetch userService token', function() {
          $httpBackend.expectGET('/auth.py');
          var controller = createController();
          $httpBackend.flush();
        });
 
 
-       it('should fail authentication', function() {
+       it('should fail userService', function() {
 
          // Notice how you can change the response even after it was set
          authRequestHandler.respond(401, '');
@@ -1089,7 +1089,7 @@ angular.mock.dump = function(object) {
          var controller = createController();
          $httpBackend.flush();
 
-         // now you don’t care about the authentication, but
+         // now you don’t care about the userService, but
          // the controller will still send the request and
          // $httpBackend will respond without you having to
          // specify the expectation and response for this request

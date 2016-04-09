@@ -1,9 +1,9 @@
 'use strict';
 app.controller('AppController', [
     '$scope',
-    'authentication',
+    'userService',
     function ($scope, authentication) {
-        // Put the authentication service in the $scope to make it accessible from all screens
-        $scope.authentication = authentication;
+        // Put the userService service in the $scope to make it accessible from all screens
+        $scope.userService = userService;
     }
 ]);

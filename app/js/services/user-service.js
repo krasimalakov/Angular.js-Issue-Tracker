@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('authentication', [
+app.factory('userService', [
     '$http',
     '$q',
     'BASE_URL',

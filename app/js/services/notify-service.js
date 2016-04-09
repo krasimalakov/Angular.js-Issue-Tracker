@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('notify',
+app.factory('notifyService',
     function () {
 
         function showInfo(message) {
