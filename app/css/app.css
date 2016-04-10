@@ -55,3 +55,12 @@ input.ng-invalid-required {
 .edit-profile-img{
     width: 100%;
 }
+
+#isAdminCheckbox{
+    padding: 10px 15px 10px 170px;
+}
+
+#isAdminCheckbox input[type="checkbox"]{
+    vertical-align: -15%;
+    margin-left: 10px;
+}

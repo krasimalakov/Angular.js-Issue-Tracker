@@ -29,6 +29,16 @@ app.factory('userService', [
 
         function logout() {
             delete sessionStorage['currentUser'];
+            delete sessionStorage['isAdmin'];
+        }
+
+        function setAdminPermission(permission) {
+            sessionStorage['isAdmin'] = permission;
+            // todo: change to functionality from user profile
+        }
+
+        function isAdmin() {
+            return sessionStorage['isAdmin'];
         }
 
         function isLogged() {
@@ -84,6 +94,8 @@ app.factory('userService', [
             login: login,
             register: register,
             logout: logout,
+            setAdminPermission: setAdminPermission,
+            isAdmin: isAdmin,
             isLogged: isLogged,
             getProfile: getProfile,
             editProfile: editProfile,

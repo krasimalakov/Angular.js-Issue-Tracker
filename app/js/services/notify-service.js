@@ -36,6 +36,7 @@ app.factory('notifyService', function () {
                 message = message + ":<br>" + errors.join("<br>");
             }
             noty({
+                    //theme: 'bootstrapTheme',
                     text: message,
                     type: 'error',
                     layout: 'topCenter',
