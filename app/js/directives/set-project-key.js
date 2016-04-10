@@ -6,8 +6,10 @@ app.directive('setProjectKey', ['$parse', function ($parse) {
                     words = projectName.trim().split(/\s+/),
                     projectKey = "";
                 words.forEach(function (word) {
-                    projectKey += word[0];
-                    // todo: ignore not letter characters
+                    var c = word.charAt(0);
+                    if (c.toLowerCase() != c.toUpperCase()) {
+                        projectKey += c;
+                    }
                 });
                 var model = $parse(attr.setProjectKey);
                 model.assign($scope, projectKey);
