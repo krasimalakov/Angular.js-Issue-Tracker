@@ -23,6 +23,11 @@ var app = angular.module('IssueTracker', ['ngRoute'])
             controller: 'UserController.ChangePassword'
         });
 
+        $routeProvider.when('/projects/add', {
+            templateUrl: 'templates/project/add-project.html',
+            controller: 'ProjectController.AddProject'
+        });
+
         $routeProvider.otherwise({redirectTo: '/'});
     }]);
 

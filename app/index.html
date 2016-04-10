@@ -10,7 +10,7 @@
 <body>
 
 
-<div ng-include="'templates/partials/header.html'"></div>
+<!--<div ng-include="'templates/partials/header.html'"></div>-->
 
 <div class="row">
     <div ng-if="userService.isLogged()" class="box col-lg-2" ng-include="'templates/partials/navbar.html'"></div>
@@ -28,14 +28,16 @@
 <script src="js/services/notify-service.js"></script>
 <script src="js/services/user-service.js"></script>
 
-<script src="js/controllers/user-controller.js"></script>
 <script src="js/controllers/app-controller.js"></script>
 <script src="js/controllers/home-controller.js"></script>
+<script src="js/controllers/user-controller.js"></script>
+<script src="js/controllers/project-controller.js"></script>
 
 <script src="js/directives/route-login.js"></script>
 <script src="js/directives/route-register.js"></script>
 <script src="js/directives/route-dashboard.js"></script>
 <script src="js/directives/input-image-data-model.js"></script>
+<script src="js/directives/set-project-key.js"></script>
 <script src="js/directives/set-admin-authorization.js"></script>
 </body>
 </html>
