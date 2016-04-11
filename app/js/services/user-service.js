@@ -1,19 +1,20 @@
 'use strict';
+
 app.factory('userService', [
     '$http',
     '$q',
     'BASE_URL',
     function ($http, $q, baseUrl) {
-
         function login(user) {
-            user.grant_type='password';
-            var deferred = $q.defer();
-            $http.post(baseUrl + 'Token', user).then(function (response) {
-                sessionStorage['currentUser'] = JSON.stringify(response.data);
-                deferred.resolve(response.data);
-            }, function (error) {
-                deferred.reject(error.data);
-            });
+            var deferred = $q.defer(),
+                data= "grant_type=password&username=" + user.username + "&password=" + user.password;
+            $http.defaults.headers.ContentType = 'application/x-www-form-urlencoded';
+            $http.post(baseUrl + 'Token', data).then(function (response) {
+                    sessionStorage['currentUser'] = JSON.stringify(response.data);
+                    deferred.resolve(response.data);
+                }, function (error) {
+                    deferred.reject(error.data);
+                });
             return deferred.promise;
         }
 
@@ -62,7 +63,9 @@ app.factory('userService', [
         function getProfile() {
             setAuthorizationHeaders();
             var deferred = $q.defer();
-            $http.get(baseUrl + 'me').then(function (response) {
+            $http.get(baseUrl + 'Account/UserInfo').then(function (response) {
+                console.log(response);
+                // todo: fix Url
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
@@ -84,7 +87,7 @@ app.factory('userService', [
         function changePassword(userData) {
             setAuthorizationHeaders();
             var deferred = $q.defer();
-            $http.put(baseUrl + 'me/ChangePassword', userData).then(function (response) {
+            $http.post(baseUrl + 'Account/ChangePassword', userData).then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
