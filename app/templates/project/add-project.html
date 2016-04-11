@@ -9,9 +9,8 @@
         </div>
         <div class="form-group">
             <label for="inputLeader">Leader</label>
-            <select ng-model="project.leader" id="inputLeader" class="form-control">
-                <option value="Pesho">Pesho</option>
-                <option value="Gosho">Gosho</option>
+            <select ng-model="project.leadId" id="inputLeader" class="form-control">
+                <option ng-repeat="user in users" value="{{user.id}}">{{user.name}}</option>
             </select>
         </div>
         <div class="form-group">
@@ -26,12 +25,14 @@
         </div>
         <div class="form-group">
             <label for="inputLabels">Labels (comma separated)</label>
-            <input ng-model="project.labels" type="text" class="form-control" id="inputLabels" placeholder="Labels" value="Soft">
+            <input ng-model="project.labels" type="text" class="form-control" id="inputLabels" placeholder="Labels"
+                   value="Soft">
             <br>
         </div>
         <div class="form-group">
             <label for="inputDescription">Description</label>
-            <textarea ng-model="project.description" id="inputDescription" class="form-control" placeholder="Description" required="required"></textarea>
+            <textarea ng-model="project.description" id="inputDescription" class="form-control"
+                      placeholder="Description" required="required"></textarea>
         </div>
         <button type="submit" class="btn btn-success" ng-click="addProject(project)"
                 ng-disabled="addProjectForm.$invalid">Add Project

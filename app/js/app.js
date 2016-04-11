@@ -1,5 +1,5 @@
 var app = angular.module('IssueTracker', ['ngRoute'])
-    .constant('BASE_URL', 'http://softuni-social-network.azurewebsites.net/api/')
+    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/api/')
 
     .config(['$routeProvider', function ($routeProvider) {
 

@@ -6,8 +6,10 @@ app.factory('userService', [
     function ($http, $q, baseUrl) {
 
         function login(user) {
+            user.grant_type='password';
+            console.log(user);
             var deferred = $q.defer();
-            $http.post(baseUrl + 'users/Login', user).then(function (response) {
+            $http.post(baseUrl + 'Token', user).then(function (response) {
                 sessionStorage['currentUser'] = JSON.stringify(response.data);
                 deferred.resolve(response.data);
             }, function (error) {
@@ -18,10 +20,11 @@ app.factory('userService', [
 
         function register(userData) {
             var deferred = $q.defer();
-            $http.post(baseUrl + 'users/Register', userData).then(function (response) {
+            $http.post(baseUrl + 'Account/Register', userData).then(function (response) {
                 sessionStorage['currentUser'] = JSON.stringify(response.data);
                 deferred.resolve(response.data);
             }, function (error) {
+                console.log(error);
                 deferred.reject(error.data);
             });
             return deferred.promise;
@@ -90,6 +93,18 @@ app.factory('userService', [
             return deferred.promise;
         }
 
+        function getAllUsers() {
+            setAuthorizationHeaders();
+            var deferred = $q.defer();
+            // todo: change to get all users
+            $http.get(baseUrl + 'users/').then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
         return {
             login: login,
             register: register,
@@ -99,6 +114,7 @@ app.factory('userService', [
             isLogged: isLogged,
             getProfile: getProfile,
             editProfile: editProfile,
-            changePassword: changePassword
+            changePassword: changePassword,
+            getAllUsers: getAllUsers
         }
     }]);
