@@ -7,7 +7,6 @@ app.factory('userService', [
 
         function login(user) {
             user.grant_type='password';
-            console.log(user);
             var deferred = $q.defer();
             $http.post(baseUrl + 'Token', user).then(function (response) {
                 sessionStorage['currentUser'] = JSON.stringify(response.data);

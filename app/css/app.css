@@ -24,11 +24,17 @@ input.ng-valid {
     border: 1px solid #e5e5e5;
 }
 
-input.ng-invalid-required {
+input.ng-invalid-required,
+textarea.ng-invalid-required,
+select.ng-invalid-required {
     background-image: radial-gradient(red 20%, transparent 60%);
     background-size: 1em 1em;
     background-position: top right;
     background-repeat: no-repeat;
+}
+
+select.ng-invalid-required {
+    background-position: top left 98.5%;
 }
 
 .btn-file {
@@ -52,15 +58,15 @@ input.ng-invalid-required {
     display: block;
 }
 
-.edit-profile-img{
+.edit-profile-img {
     width: 100%;
 }
 
-#isAdminCheckbox{
+#isAdminCheckbox {
     padding: 10px 15px 10px 170px;
 }
 
-#isAdminCheckbox input[type="checkbox"]{
+#isAdminCheckbox input[type="checkbox"] {
     vertical-align: -15%;
     margin-left: 10px;
 }

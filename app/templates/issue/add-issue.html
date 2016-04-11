@@ -1,0 +1,54 @@
+<div class=jumbotron>
+    <h2 style="margin-top: 0"> Add new Issue</h2>
+
+    <form>
+        <div class="form-group">
+            <label for="inputTitle">Title</label>
+            <input id="inputTitle" type="text" class="form-control" ng-model="issue.title" placeholder="Issue Title"
+                   set-key-from-text="issue.issueKey" required="required">
+        </div>
+        <div class="form-group">
+            <label for="inputAssignee">Assignee</label>
+            <select id="inputAssignee" class="form-control" ng-model="issue.assigneeId">
+                <option>Kircho</option>
+                <option>Petkancho</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputProject">Project</label>
+            <select id="inputProject" class="form-control" ng-model="issue.projectId">
+                <option>SIT</option>
+                <option>Cart Management</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputIssueKey">Issue Key</label>
+            <input id="inputIssueKey" type="text" class="form-control" placeholder="Issue Key"
+                   ng-model="issue.issueKey" disabled>
+        </div>
+        <div class="form-group">
+            <label for="inputPriority">Priority</label>
+            <select id="inputPriority" class="form-control" ng-model="issue.priorityId">
+                <option>Urgent</option>
+                <option>Medium</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputDueDate">Due Date</label>
+            <input id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" ng-model="issue.dueDate"
+                   required="required">
+        </div>
+        <div class="form-group">
+            <label for="inputLabel">Labels (comma separated)</label>
+            <input id="inputLabel" type="text" class="form-control" placeholder="Labels" value="Soft"
+                   ng-model="issue.labels">
+            <br>
+        </div>
+        <div class="form-group">
+            <label for="inputDescription">Description</label>
+            <textarea id="inputDescription" class="form-control" placeholder="Description"
+                      ng-model="issue.description" required="required"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success" ng-click="addIssue(issue)">Add Issue</button>
+    </form>
+</div>

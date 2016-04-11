@@ -1,4 +1,4 @@
-app.directive('setProjectKey', ['$parse', function ($parse) {
+app.directive('setKeyFromText', ['$parse', function ($parse) {
     return {
         link: function ($scope, element, attr) {
             element.bind("change", function (e) {
@@ -11,7 +11,7 @@ app.directive('setProjectKey', ['$parse', function ($parse) {
                         projectKey += c;
                     }
                 });
-                var model = $parse(attr.setProjectKey);
+                var model = $parse(attr.setKeyFromText);
                 model.assign($scope, projectKey);
                 $scope.$apply();
             });
