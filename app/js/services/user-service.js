@@ -63,7 +63,7 @@ app.factory('userService', [
         function getProfile() {
             setAuthorizationHeaders();
             var deferred = $q.defer();
-            $http.get(baseUrl + 'Account/UserInfo').then(function (response) {
+            $http.get(baseUrl + 'users/me').then(function (response) {
                 console.log(response);
                 // todo: fix Url
                 deferred.resolve(response.data);
