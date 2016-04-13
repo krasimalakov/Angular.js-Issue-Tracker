@@ -29,12 +29,8 @@ textarea.ng-invalid-required,
 select.ng-invalid-required {
     background-image: radial-gradient(red 20%, transparent 60%);
     background-size: 1em 1em;
-    background-position: top right;
+    background-position: top left;
     background-repeat: no-repeat;
-}
-
-select.ng-invalid-required {
-    background-position: top left 98.5%;
 }
 
 .btn-file {

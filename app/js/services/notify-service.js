@@ -15,14 +15,14 @@ app.factory('notifyService', function () {
         function showError(message, serverError) {
             // Collect errors to display from the server response
             var errors = [];
-            if (serverError && serverError.message) {
-                errors.push(serverError.message);
+            if (serverError && serverError.Message) {
+                errors.push(serverError.Message);
             }
-            if (serverError && serverError.error_description) {
-                errors.push(serverError.error_description);
+            if (serverError && serverError.Error_description) {
+                errors.push(serverError.Error_description);
             }
-            if (serverError && serverError.modelState) {
-                var modelStateErrors = serverError.modelState;
+            if (serverError && serverError.ModelState) {
+                var modelStateErrors = serverError.ModelState;
                 for (var propertyName in modelStateErrors) {
                     var errorMessages = modelStateErrors[propertyName];
                     var trimmedName = propertyName.substr(propertyName.indexOf('.') + 1);
@@ -33,7 +33,7 @@ app.factory('notifyService', function () {
                 }
             }
             if (errors.length > 0) {
-                message = message + ":<br>" + errors.join("<br>");
+                message = message + "<br>" + errors.join("<br>");
             }
             noty({
                     //theme: 'bootstrapTheme',

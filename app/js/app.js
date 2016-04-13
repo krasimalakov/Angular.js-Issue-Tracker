@@ -1,5 +1,5 @@
 var app = angular.module('IssueTracker', ['ngRoute'])
-    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/api/')
+    .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
 
     .config(['$routeProvider', function ($routeProvider) {
 
@@ -19,6 +19,10 @@ var app = angular.module('IssueTracker', ['ngRoute'])
             .when('/profile/password', {
                 templateUrl: 'templates/user/change-password.html',
                 controller: 'UserController.ChangePassword'
+            })
+            .when('/profile/set-admin', {
+                templateUrl: 'templates/user/set-admin-permission.html',
+                controller: 'UserController.SetAdminPermission'
             })
             .when('/projects/add', {
                 templateUrl: 'templates/project/add-project.html',

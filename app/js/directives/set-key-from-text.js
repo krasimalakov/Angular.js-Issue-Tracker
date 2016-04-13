@@ -1,5 +1,6 @@
 app.directive('setKeyFromText', ['$parse', function ($parse) {
     return {
+        restrict: 'A',
         link: function ($scope, element, attr) {
             element.bind("change", function (e) {
                 var projectName = e.target.value,

@@ -1,5 +1,6 @@
 app.directive('imageDataModel', ['$parse', function ($parse) {
     return {
+        restrict: 'A',
         link: function ($scope, element, attr) {
             element.bind("change", function (e) {
                 var file = (e.srcElement || e.target).files[0];

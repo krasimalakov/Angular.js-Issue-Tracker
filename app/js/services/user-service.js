@@ -7,41 +7,55 @@ app.factory('userService', [
     function ($http, $q, baseUrl) {
         function login(user) {
             var deferred = $q.defer(),
-                data= "grant_type=password&username=" + user.username + "&password=" + user.password;
+                data = "grant_type=password&username=" + user.username + "&password=" + user.password;
             $http.defaults.headers.ContentType = 'application/x-www-form-urlencoded';
-            $http.post(baseUrl + 'Token', data).then(function (response) {
-                    sessionStorage['currentUser'] = JSON.stringify(response.data);
-                    deferred.resolve(response.data);
-                }, function (error) {
-                    deferred.reject(error.data);
-                });
+            $http.post(baseUrl + 'api/Token', data).then(function (response) {
+                initUserData(response.data);
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
             return deferred.promise;
         }
 
         function register(userData) {
             var deferred = $q.defer();
-            $http.post(baseUrl + 'Account/Register', userData).then(function (response) {
-                sessionStorage['currentUser'] = JSON.stringify(response.data);
+            $http.post(baseUrl + 'api/Account/Register', userData).then(function (response) {
+                initUserData(response.data);
                 deferred.resolve(response.data);
             }, function (error) {
-                console.log(error);
                 deferred.reject(error.data);
             });
             return deferred.promise;
         }
 
         function logout() {
-            delete sessionStorage['currentUser'];
-            delete sessionStorage['isAdmin'];
+            var deferred = $q.defer();
+            setAuthorizationHeaders();
+            $http.post(baseUrl + 'api/Account/Logout', null).then(function (response) {
+                deferred.resolve(response.data);
+                delete sessionStorage['currentUser'];
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
         }
 
-        function setAdminPermission(permission) {
-            sessionStorage['isAdmin'] = permission;
-            // todo: change to functionality from user profile
+        function setAdminPermission(userId) {
+            console.log(userId);
+            setAuthorizationHeaders();
+            var deferred = $q.defer();
+            $http.put(baseUrl + 'users/makeadmin', {UserId: userId}).then(function (response) {
+                initUserData();
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
         }
 
         function isAdmin() {
-            return sessionStorage['isAdmin'];
+            return JSON.parse(sessionStorage['currentUser']).isAdmin;
         }
 
         function isLogged() {
@@ -58,6 +72,26 @@ app.factory('userService', [
                 $http.defaults.headers.common['Authorization'] = 'Bearer ' + currentUser.access_token;
                 $http.defaults.headers.common['Accept'] = 'application/json;odata=verbose';
             }
+        }
+
+        function initUserData(login_response) {
+            if (login_response){
+                sessionStorage['currentUser'] = JSON.stringify({access_token: login_response.access_token});
+            }
+            setAuthorizationHeaders();
+            var deferred = $q.defer();
+            $http.get(baseUrl + 'users/me').then(function (response) {
+                var currentUser = JSON.parse(sessionStorage['currentUser']);
+                currentUser['isAdmin'] = response.data.isAdmin;
+                currentUser['id'] = response.data.Id;
+                currentUser['username'] = response.data.Username;
+                sessionStorage['currentUser'] = JSON.stringify(currentUser);
+                console.log(currentUser);
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
         }
 
         function getProfile() {
@@ -87,7 +121,7 @@ app.factory('userService', [
         function changePassword(userData) {
             setAuthorizationHeaders();
             var deferred = $q.defer();
-            $http.post(baseUrl + 'Account/ChangePassword', userData).then(function (response) {
+            $http.post(baseUrl + 'api/Account/ChangePassword', userData).then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
@@ -98,8 +132,7 @@ app.factory('userService', [
         function getAllUsers() {
             setAuthorizationHeaders();
             var deferred = $q.defer();
-            // todo: change to get all users
-            $http.get(baseUrl + 'users/').then(function (response) {
+            $http.get(baseUrl + 'users').then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
@@ -117,6 +150,7 @@ app.factory('userService', [
             getProfile: getProfile,
             editProfile: editProfile,
             changePassword: changePassword,
+            getCurrentUser: getCurrentUser,
             getAllUsers: getAllUsers
         }
     }]);
