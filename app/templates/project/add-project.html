@@ -23,17 +23,23 @@
             <input ng-model="project.priorities" type="text" class="form-control" id="inputPriorities"
                    placeholder="Available Priorities For The Issues" value="Low, Medium, Urgent">
         </div>
+
         <div class="form-group">
             <label for="inputLabels">Labels (comma separated)</label>
-            <input ng-model="project.labels" type="text" class="form-control" id="inputLabels" placeholder="Labels"
-                   value="Soft">
-            <br>
+            <input ng-model="project.labels" type="text" list="labelsList" class="form-control" id="inputLabels"
+                   placeholder="Labels">
+            <datalist id="labelsList">
+                <option ng-repeat="label in labels" value="{{ label.Name}}"></option>
+            </datalist>
+
         </div>
+
         <div class="form-group">
             <label for="inputDescription">Description</label>
             <textarea ng-model="project.description" id="inputDescription" class="form-control"
                       placeholder="Description" required="required"></textarea>
         </div>
+
         <button type="submit" class="btn btn-success" ng-click="addProject(project)"
                 ng-disabled="addProjectForm.$invalid">Add Project
         </button>

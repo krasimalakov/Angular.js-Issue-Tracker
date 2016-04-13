@@ -19,7 +19,7 @@ app.controller('UserController.EditProfile', [
 
         $scope.editProfile = function (userData) {
             userService.editProfile(userData).then(function (result) {
-                notifyService.showInfo('User profile update is successful !');
+                notifyService.showInfo('User profile update is successfully !');
                 $location.path('/');
             }, function (error) {
                 notifyService.showError('User profile update failed !', error);
