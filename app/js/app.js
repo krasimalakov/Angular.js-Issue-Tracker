@@ -24,6 +24,10 @@ var app = angular.module('IssueTracker', ['ngRoute'])
                 templateUrl: 'templates/user/set-admin-permission.html',
                 controller: 'UserController.SetAdminPermission'
             })
+            .when('/projects', {
+                templateUrl: 'templates/project/all-projects.html',
+                controller: 'ProjectController.AllProjects'
+            })
             .when('/projects/add', {
                 templateUrl: 'templates/project/add-project.html',
                 controller: 'ProjectController.AddProject'

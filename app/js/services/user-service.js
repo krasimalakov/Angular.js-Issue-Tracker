@@ -94,30 +94,6 @@ app.factory('userService', [
             return deferred.promise;
         }
 
-        function getProfile() {
-            setAuthorizationHeaders();
-            var deferred = $q.defer();
-            $http.get(baseUrl + 'users/me').then(function (response) {
-                console.log(response);
-                // todo: fix Url
-                deferred.resolve(response.data);
-            }, function (error) {
-                deferred.reject(error.data);
-            });
-            return deferred.promise;
-        }
-
-        function editProfile(userData) {
-            setAuthorizationHeaders();
-            var deferred = $q.defer();
-            $http.put(baseUrl + 'me', userData).then(function (response) {
-                deferred.resolve(response.data);
-            }, function (error) {
-                deferred.reject(error.data);
-            });
-            return deferred.promise;
-        }
-
         function changePassword(userData) {
             setAuthorizationHeaders();
             var deferred = $q.defer();
@@ -147,8 +123,6 @@ app.factory('userService', [
             setAdminPermission: setAdminPermission,
             isAdmin: isAdmin,
             isLogged: isLogged,
-            getProfile: getProfile,
-            editProfile: editProfile,
             changePassword: changePassword,
             getCurrentUser: getCurrentUser,
             getAllUsers: getAllUsers
