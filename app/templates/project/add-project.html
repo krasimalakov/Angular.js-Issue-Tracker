@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <label for="inputLabels">Labels (comma separated)</label>
-            <input ng-model="project.labels" type="text" list="labelsList" class="form-control" id="inputLabels"
+            <input ng-model="project.labels" input-label-suggest-list="labels" type="text" list="labelsList" class="form-control" id="inputLabels"
                    placeholder="Labels">
             <datalist id="labelsList">
                 <option ng-repeat="label in labels" value="{{ label.Name}}"></option>
