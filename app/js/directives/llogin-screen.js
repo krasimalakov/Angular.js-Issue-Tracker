@@ -1,4 +1,4 @@
-app.directive('login', function () {
+app.directive('loginScreen', function () {
     return{
         restrict: 'A',
         templateUrl: 'templates/user/login.html',

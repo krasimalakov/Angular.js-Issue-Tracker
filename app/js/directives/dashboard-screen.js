@@ -1,7 +1,7 @@
-app.directive('dashboard', function () {
+app.directive('dashboardScreen', function () {
     return{
         restrict: 'A',
         templateUrl: 'templates/dashboard.html',
-        controller: ''
+        controller: 'DashboardController'
     }
 });

@@ -1,4 +1,4 @@
-app.directive('register', function () {
+app.directive('registerScreen', function () {
     return{
         restrict: 'A',
         templateUrl: 'templates/user/register.html',
