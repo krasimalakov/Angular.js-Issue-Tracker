@@ -70,6 +70,14 @@ ul.pagination {
     vertical-align: bottom;
 }
 
+.panel-heading {
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #F9F9F9;
+}
+
+.panel-title:before{
+    content: 'Issue Tracker - ';
+}
 .panel-title {
     margin: 10px auto;
     font-size: 24px;
@@ -92,11 +100,6 @@ ul.pagination {
 
 .dashboard-panel-right {
     float: right;
-}
-
-.dashboard-panel-heading {
-    border-bottom: 1px solid #e5e5e5;
-    background-color: #F9F9F9;
 }
 
 .dashboard-panel-body {
