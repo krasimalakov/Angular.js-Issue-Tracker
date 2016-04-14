@@ -32,6 +32,10 @@ var app = angular.module('IssueTracker', ['ngRoute'])
                 templateUrl: 'templates/project/add-project.html',
                 controller: 'ProjectController.AddProject'
             })
+            .when('/projects/:id', {
+                templateUrl: 'templates/project/view-project.html',
+                controller: 'ProjectController.ViewProject'
+            })
             .when('/projects/:id/add-issue', {
                 templateUrl: 'templates/issue/add-issue.html',
                 controller: 'IssueController.AddIssue'

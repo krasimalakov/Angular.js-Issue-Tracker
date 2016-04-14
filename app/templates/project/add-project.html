@@ -1,5 +1,5 @@
 <div class=jumbotron>
-    <h2 style="margin-top: 0"> Add new Project</h2>
+    <h2> Add new Project</h2>
 
     <form name="addProjectForm">
         <div class="form-group">
@@ -26,7 +26,8 @@
 
         <div class="form-group">
             <label for="inputLabels">Labels (comma separated)</label>
-            <input ng-model="project.labels" input-label-suggest-list="labels" type="text" list="labelsList" class="form-control" id="inputLabels"
+            <input ng-model="project.labels" input-label-suggest-list="labels" type="text" list="labelsList"
+                   class="form-control" id="inputLabels"
                    placeholder="Labels">
             <datalist id="labelsList">
                 <option ng-repeat="label in labels" value="{{ label.Name}}"></option>
