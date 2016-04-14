@@ -1,19 +1,11 @@
-.header {
-    text-align: center;
-    /*border: 1px solid blue;*/
-}
-
-.header h2 {
-    margin: 0;
+body {
+    width: 100%;
+    margin: 0 auto;
 }
 
 .disabled-button {
     opacity: 0.5;
 }
-
-/*input.ng-invalid-required{*/
-/*border: 1px solid #ff625d;*/
-/*}*/
 
 input.ng-invalid:focus {
     border: 1px solid #ac2925;
@@ -65,4 +57,48 @@ select.ng-invalid-required {
 #isAdminCheckbox input[type="checkbox"] {
     vertical-align: -15%;
     margin-left: 10px;
+}
+
+ul.pagination {
+    display: table;
+    margin: 0 auto;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.pagination {
+    vertical-align: bottom;
+}
+
+.panel-title {
+    margin: 10px auto;
+    font-size: 24px;
+    text-align: center;
+}
+
+.dashboard-panel {
+    border: 1px solid #3C85C4;
+    border-top: none;
+    width: 49.5%;
+    height: 500px;
+    margin-bottom: 15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.dashboard-panel-left {
+    float: left;
+}
+
+.dashboard-panel-right {
+    float: right;
+}
+
+.dashboard-panel-heading {
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #F9F9F9;
+}
+
+.dashboard-panel-body {
+    height: 80%;
 }

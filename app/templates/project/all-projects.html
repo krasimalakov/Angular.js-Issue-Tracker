@@ -1,12 +1,14 @@
-<div class=jumbotron>
-    <h1>Projects</h1>
+<div class="panel-primary">
+    <div class="dashboard-panel-heading">
+        <h3 class="panel-title">Projects</h3>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th class="col-lg-1">ProjectKey</th>
-            <th class="col-lg-12">Project</th>
-            <th class="col-lg-1"/>
-            <th class="col-lg-1"/>
+            <th class="col-lg-1">Key</th>
+            <th class="col-lg-12">Name</th>
+            <th class="col-lg-1"></th>
+            <th class="col-lg-1"></th>
         </tr>
         </thead>
         <tbody>
@@ -14,13 +16,17 @@
             <td>{{project.ProjectKey}}</td>
             <td>{{project.Name}}</td>
             <td>
-                <button class="text-center btn btn-success" ng-click="">Edit</button>
+                <button class="text-center btn btn-sm btn-primary" ng-click="">Edit</button>
             </td>
             <td>
-                <button class="text-center btn btn-warning" ng-click="">Add issue</button>
+                <button class="text-center btn btn-sm btn-warning" ng-click="">Add issue</button>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-lg btn-success">Add New Project</a>
+    <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-primary ">Add New Project</a>
+    <div ng-if="pagination.maxSize>pagination.pageSize" pagination ng-model="pagination.startPage"
+         items-per-page="pagination.pageSize" total-items="pagination.maxSize"
+         ng-change="selectProjectToView()" max-size="9" boundary-links="true"></div>
 </div>
+

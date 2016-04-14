@@ -1,40 +1,61 @@
-<div class=jumbotron>
-    <h1>Dashboard</h1>
-    <div class="col-lg-6">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <td>Issue</td>
-                <td>Project</td>
-                <td>Due Date</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Bad Request has no message describing the problem</td>
-                <td>SIT</td>
-                <td>28/03/2016</td>
-            </tr>
-
-            </tbody>
-        </table>
+<div class="panel-primary">
+    <div class="dashboard-panel-heading">
+        <h3 class="panel-title">Dashboard</h3>
     </div>
-    <div  class="col-lg-6">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <td>Project</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="project in projects|filter:{Lead:{Id:userService.getCurrentUser().id}}">
-                <td>{{project.ProjectKey}}</td>
-                <td><a href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
-            </tr>
+    <div class="dashboard-panel dashboard-panel-left">
+        <div class="dashboard-panel-heading">
+            <h4>Issues</h4>
+        </div>
+        <div class="dashboard-panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Issue</td>
+                    <td>Project</td>
+                    <td>Due Date</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Bad Request has no message describing the problem</td>
+                    <td>SIT</td>
+                    <td>28/03/2016</td>
+                </tr>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div pagination ng-if="pagination.maxSize>pagination.pageSize" ng-model="pagination.startPage"
+             items-per-page="pagination.pageSize" total-items="pagination.maxSize"
+             ng-change="selectProjectToView()" max-size="9" boundary-links="true"></div>
     </div>
-    <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-lg btn-success">Add New Project</a>
-    <a href="#/projects" ng-if="userService.isAdmin()" class="btn btn-lg btn-success">List All Projects</a>
+    <div class="dashboard-panel dashboard-panel-right">
+        <div class="dashboard-panel-heading">
+            <h4>Projects</h4>
+        </div>
+        <div class="dashboard-panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Project</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="project in projects">
+                    <td>{{project.ProjectKey}}</td>
+                    <td><a href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div pagination ng-if="pagination.maxSize>pagination.pageSize" ng-model="pagination.startPage"
+             items-per-page="pagination.pageSize" total-items="pagination.maxSize"
+             ng-change="selectProjectToView()" max-size="9" boundary-links="true"></div>
+    </div>
+    <div>
+        <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-warning col-lg-offset-8">Add New
+            Project</a>
+        <a href="#/projects" ng-if="userService.isAdmin()" class="btn btn-primary">List All Projects</a>
+    </div>
 </div>

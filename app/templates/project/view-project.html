@@ -1,5 +1,7 @@
-<div ng-if="project!=undefined" class=jumbotron>
-    <h1>Project details</h1>
+<div ng-if="project!=undefined" class="panel-primary">
+    <div class="dashboard-panel-heading">
+        <h3 class="panel-title">Project details</h3>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -34,5 +36,6 @@
         </tr>
         </tbody>
     </table>
-    <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-lg btn-success">Add New Project</a>
+    <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-warning">Add New Project</a>
+    <a href="" ng-if="userService.isAdmin()" class="btn btn-primary">Edit Project</a>
 </div>

@@ -86,7 +86,6 @@ app.factory('userService', [
                 currentUser['id'] = response.data.Id;
                 currentUser['username'] = response.data.Username;
                 sessionStorage['currentUser'] = JSON.stringify(currentUser);
-                console.log(currentUser);
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
