@@ -1,11 +1,13 @@
-<form name="setAdminPermissionForm" class="form-horizontal col-lg-5 col-lg-offset-2">
-    <fieldset class="text-center">
-        <legend>Set user admin permission</legend>
-
-        <div class="form-group">
+<div class="panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Set user admin permission</h3>
+    </div>
+    <form name="setAdminPermissionForm" class="form-horizontal col-lg-4 col-lg-offset-4">
+        <div class="form-group row-offset">
             <label for="inputUsеrId">User</label>
             <select ng-model="userId" id="inputUsеrId" class="form-control" required>
-                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
+                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}
+                </option>
             </select>
         </div>
 
@@ -19,7 +21,7 @@
 
 
         <div class="form-group">
-            <div class="col-lg-8 col-lg-offset-4">
+            <div class="col-lg-8 col-lg-offset-3">
                 <a href="#/" class="btn btn-default">Cancel</a>
                 <button type="button" class="btn btn-primary" ng-click="setAdminPermission(userId)"
                         ng-disabled="setAdminPermissionForm.$invalid || !user.isAdmin">
@@ -27,5 +29,5 @@
                 </button>
             </div>
         </div>
-    </fieldset>
-</form>
+    </form>
+</div>
