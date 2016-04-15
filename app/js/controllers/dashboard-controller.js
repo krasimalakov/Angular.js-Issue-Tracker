@@ -7,6 +7,8 @@ app.controller('DashboardController', [
     'userService',
     'projectService',
     function ($scope, $location, notifyService, userService, projectService) {
+        userService.denyNotloggedUser();
+
         projectService.getMyProjects().then(function (projects) {
             $scope.pagination = {
                 'startPage': 1,

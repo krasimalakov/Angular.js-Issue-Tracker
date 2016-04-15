@@ -6,6 +6,7 @@ app.controller('UserController.SetAdminPermission', [
     'notifyService',
     'userService',
     function ($scope, $location, notifyService, userService) {
+        userService.denyNotloggedUser();
 
         userService.getAllUsers().then(function (users) {
             $scope.users=users;

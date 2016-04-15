@@ -8,6 +8,8 @@ app.controller('ProjectController.AddProject', [
     'labelService',
     'projectService',
     function ($scope, $location, notifyService, userService, labelService, projectService) {
+        userService.denyNotloggedUser();
+
         userService.getAllUsers().then(function (users) {
             $scope.users = users;
         }, function (error) {

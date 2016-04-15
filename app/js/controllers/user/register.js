@@ -6,6 +6,8 @@ app.controller('UserController.Register', [
     'notifyService',
     'userService',
     function ($scope, $location, notifyService, userService) {
+        userService.denyNotloggedUser();
+
         $scope.register = function (user) {
             user.gender = user.gender || 0;
             userService.register(user).then(function (result) {

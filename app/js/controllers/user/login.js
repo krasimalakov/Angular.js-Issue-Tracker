@@ -6,6 +6,8 @@ app.controller('UserController.Login', [
     'notifyService',
     'userService',
     function ($scope, $location, notifyService, userService) {
+        userService.denyNotloggedUser();
+
         // todo: remove init username password
         $scope.user = {username: 'krasi@krasi.com', password: '123456'};
 

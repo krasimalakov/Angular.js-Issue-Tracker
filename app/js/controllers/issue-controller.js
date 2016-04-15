@@ -7,6 +7,7 @@ app.controller('IssueController.AddIssue', [
     'notifyService',
     'userService',
     function ($scope, $location, $routeParams, notifyService, userService) {
+        userService.denyNotloggedUser();
 
         $scope.addIssue = function (issue) {
 

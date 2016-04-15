@@ -8,6 +8,8 @@ app.controller('ProjectController.AllProjects', [
     'labelService',
     'projectService',
     function ($scope, $location, notifyService, userService, labelService, projectService) {
+        userService.denyNotloggedUser();
+
         projectService.getProjects().then(function (projects) {
 
             $scope.pagination = {

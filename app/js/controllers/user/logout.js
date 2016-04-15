@@ -6,6 +6,8 @@ app.controller('UserController.Logout', [
     'notifyService',
     'userService',
     function ($scope, $location, notifyService, userService) {
+        userService.denyNotloggedUser();
+
         userService.logout().then(function (result) {
             notifyService.showInfo('User logout is successfully !');
             $location.path('/');

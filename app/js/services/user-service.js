@@ -3,8 +3,9 @@
 app.factory('userService', [
     '$http',
     '$q',
+    '$location',
     'BASE_URL',
-    function ($http, $q, baseUrl) {
+    function ($http, $q, $location, baseUrl) {
         function login(user) {
             var deferred = $q.defer(),
                 data = "grant_type=password&username=" + user.username + "&password=" + user.password;
@@ -62,6 +63,12 @@ app.factory('userService', [
             return sessionStorage['currentUser'] != undefined;
         }
 
+        function denyNotLoggedUser() {
+            if (!isLogged()){
+                $location.path('/');
+            }
+        }
+
         function getCurrentUser() {
             return JSON.parse(sessionStorage['currentUser']);
         }
@@ -75,7 +82,7 @@ app.factory('userService', [
         }
 
         function initUserData(login_response) {
-            if (login_response){
+            if (login_response) {
                 sessionStorage['currentUser'] = JSON.stringify({access_token: login_response.access_token});
             }
             setAuthorizationHeaders();
@@ -122,6 +129,7 @@ app.factory('userService', [
             setAdminPermission: setAdminPermission,
             isAdmin: isAdmin,
             isLogged: isLogged,
+            denyNotloggedUser: denyNotLoggedUser,
             changePassword: changePassword,
             getCurrentUser: getCurrentUser,
             getAllUsers: getAllUsers

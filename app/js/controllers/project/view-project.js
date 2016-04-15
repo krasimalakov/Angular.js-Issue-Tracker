@@ -8,6 +8,7 @@ app.controller('ProjectController.ViewProject', [
     'userService',
     'projectService',
     function ($scope, $location, $routeParams, notifyService, userService, projectService) {
+        userService.denyNotloggedUser();
 
         projectService.getProjects($routeParams.id).then(function (project) {
             $scope.project = project;

@@ -10,6 +10,7 @@ app.controller('ProjectController.EditProject', [
     'labelService',
     'projectService',
     function ($scope, $location, $routeParams, $filter, notifyService, userService, labelService, projectService) {
+        userService.denyNotloggedUser();
 
         userService.getAllUsers().then(function (users) {
             $scope.users = users;
