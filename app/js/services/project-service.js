@@ -20,10 +20,10 @@ app.factory('projectService', [
         function getMyProjects(projectId) {
             var deferred = $q.defer();
             getProjects().then(function (projects) {
-                var myProjects=[];
+                var myProjects = [];
                 projects.forEach(function (project) {
                     // todo: add expression for my project by my issue
-                    if (project.Lead.Id==userService.getCurrentUser().id){
+                    if (project.Lead.Id == userService.getCurrentUser().id) {
                         myProjects.push(project);
                     }
                 });
@@ -33,7 +33,7 @@ app.factory('projectService', [
             });
             return deferred.promise;
         }
-        
+
         function addProject(project) {
             var deferred = $q.defer();
             $http.post(baseUrl + 'Projects', project).then(function (response) {
@@ -44,9 +44,21 @@ app.factory('projectService', [
             return deferred.promise;
         }
 
+        function updateProject(project) {
+            var deferred = $q.defer();
+            $http.put(baseUrl + 'Projects/'+project.Id, project).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             getProjects: getProjects,
             getMyProjects: getMyProjects,
-            addProject: addProject
+            addProject: addProject,
+            updateProject: updateProject
         }
     }]);

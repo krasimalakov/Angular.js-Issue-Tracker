@@ -1,34 +1,37 @@
 <div class="panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Add new project</h3>
+        <h3 class="panel-title">Edit project</h3>
     </div>
 
     <form name="addProjectForm">
         <div class="form-group">
             <label for="inputProjectName">Name</label>
-            <input ng-model="project.name" type="text" class="form-control" id="inputProjectName"
+            <input ng-model="project.Name" type="text" class="form-control" id="inputProjectName"
                    set-key-from-text="project.projectKey" placeholder="Project Name" required="required">
         </div>
         <div class="form-group">
             <label for="inputLeader">Leader</label>
-            <select ng-model="project.leadId" id="inputLeader" class="form-control">
-                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
+            <select ng-model="project.Lead.Id" id="inputLeader" class="form-control">
+            <option ng-repeat="user in users | orderBy:'Username'"
+                    title="{{user.Username}}"
+                    ng-selected="user.Id == project.Lead.Id" value="{{user.Id}}">{{user.Username}}
+            </option>
             </select>
         </div>
         <div class="form-group">
             <label for="inputProjectKey">Project Key</label>
-            <input ng-model="project.projectKey" type="text" class="form-control" id="inputProjectKey"
+            <input ng-model="project.ProjectKey" type="text" class="form-control" id="inputProjectKey"
                    placeholder="Project Key" required="required" disabled>
         </div>
         <div class="form-group">
             <label for="inputPriorities">Priorities (comma separated)</label>
-            <input ng-model="project.priorities" type="text" class="form-control" id="inputPriorities"
+            <input ng-model="project.Priorities" type="text" class="form-control" id="inputPriorities"
                    placeholder="Available Priorities For The Issues" value="Low, Medium, Urgent">
         </div>
 
         <div class="form-group">
             <label for="inputLabels">Labels (comma separated)</label>
-            <input ng-model="project.labels" input-label-suggest-list="labels" type="text" list="labelsList"
+            <input ng-model="project.Labels" input-label-suggest-list="labels" type="text" list="labelsList"
                    class="form-control" id="inputLabels"
                    placeholder="Labels">
             <datalist id="labelsList">
@@ -39,12 +42,12 @@
 
         <div class="form-group">
             <label for="inputDescription">Description</label>
-            <textarea ng-model="project.description" id="inputDescription" class="form-control"
+            <textarea ng-model="project.Description" id="inputDescription" class="form-control"
                       placeholder="Description" required="required"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-lg btn-primary center-block" ng-click="addProject(project)"
-                ng-disabled="addProjectForm.$invalid">Add Project
+        <button type="submit" class="btn btn-lg btn-primary center-block" ng-click="updateProject(project)"
+                ng-disabled="addProjectForm.$invalid">Save
         </button>
     </form>
 </div>

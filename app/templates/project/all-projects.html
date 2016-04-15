@@ -15,10 +15,10 @@
         <tr ng-repeat="project in projects">
             <td>{{project.ProjectKey}}</td>
             <td>{{project.Name}}</td>
-            <td>
-                <button class="text-center btn btn-sm btn-primary" ng-click="">Edit</button>
+            <td ng-if="project.Lead.Id==userService.getCurrentUser().id">
+                <a href="#/projects/{{project.Id}}/edit"class="text-center btn btn-sm btn-primary" ng-click="">Edit</a>
             </td>
-            <td>
+            <td ng-if="project.Lead.Id==userService.getCurrentUser().id">
                 <button class="text-center btn btn-sm btn-warning" ng-click="">Add issue</button>
             </td>
         </tr>

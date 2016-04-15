@@ -36,6 +36,10 @@ var app = angular.module('IssueTracker', ['ngRoute', 'ui.bootstrap.pagination'])
                 templateUrl: 'templates/project/view-project.html',
                 controller: 'ProjectController.ViewProject'
             })
+            .when('/projects/:id/edit', {
+                templateUrl: 'templates/project/edit-project.html',
+                controller: 'ProjectController.EditProject'
+            })
             .when('/projects/:id/add-issue', {
                 templateUrl: 'templates/issue/add-issue.html',
                 controller: 'IssueController.AddIssue'
