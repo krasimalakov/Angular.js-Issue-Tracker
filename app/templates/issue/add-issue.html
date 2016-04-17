@@ -17,8 +17,10 @@
         <div class="form-group">
             <label for="inputProject">Project</label>
             <select id="inputProject" class="form-control" ng-model="issue.ProjectId">
-                <option>SIT</option>
-                <option>Cart Management</option>
+                <option ng-repeat="project in projects | orderBy:'Name'" ng-selected="issue.ProjectId==project.Id"
+                        value="{{project.Id}}">{{project.Name}}
+                </option>
+
             </select>
         </div>
         <div class="form-group">
@@ -29,13 +31,13 @@
         <div class="form-group">
             <label for="inputPriority">Priority</label>
             <select id="inputPriority" class="form-control" ng-model="issue.PriorityId">
-                <option>Urgent</option>
-                <option>Medium</option>
+                <option value="0">Urgent</option>
+                <option value="1">Medium</option>
             </select>
         </div>
         <div class="form-group">
             <label for="inputDueDate">Due Date</label>
-            <input id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" ng-model="issue.DueDate"
+            <input datepicker id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" ng-model="issue.DueDate"
                    required="required">
         </div>
         <div class="form-group">
@@ -52,6 +54,8 @@
             <textarea id="inputDescription" class="form-control" placeholder="Description"
                       ng-model="issue.Description" required="required"></textarea>
         </div>
-        <button type="submit" class="btn btn-success" ng-click="addIssue(issue)" ng-disabled="addIssueForm.$invalid">Add Issue</button>
+        <button type="submit" class="btn btn-success" ng-click="addIssue(issue)" ng-disabled="addIssueForm.$invalid">Add
+            Issue
+        </button>
     </form>
 </div>

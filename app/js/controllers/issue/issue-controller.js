@@ -24,6 +24,13 @@ app.controller('IssueController.AddIssue', [
             notifyService.showError('Get all labels request failed !', error);
         });
 
+        projectService.getProjects().then(function (projects) {
+            $scope.projects = projects;
+        }, function (error) {
+            notifyService.showError('Get all projects request failed !', error);
+        });
+        $scope.issue={};
+        $scope.issue.ProjectId=$routeParams.id;
         $scope.addIssue = function (issue) {
 
             console.log(issue);

@@ -28,6 +28,7 @@ app.controller('ProjectController.AddProject', [
             labels.forEach(function (label) {
                 project.labels.push({Name:label})
             });
+            
             var priorities = project.priorities.trim().split(/\s*,\s*/);
             project.priorities=[];
             priorities.forEach(function (priority) {
