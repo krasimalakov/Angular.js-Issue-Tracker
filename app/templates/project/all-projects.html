@@ -19,7 +19,7 @@
                 <a href="#/projects/{{project.Id}}/edit"class="text-center btn btn-sm btn-primary" ng-click="">Edit</a>
             </td>
             <td ng-if="project.Lead.Id==userService.getCurrentUser().id">
-                <button class="text-center btn btn-sm btn-warning" ng-click="">Add issue</button>
+                <a href="#/projects/{{project.Id}}/add-issue" class="text-center btn btn-sm btn-warning" ng-click="">Add issue</a>
             </td>
         </tr>
         </tbody>

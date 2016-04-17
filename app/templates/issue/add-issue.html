@@ -1,22 +1,22 @@
-<div class=jumbotron>
-    <h2 style="margin-top: 0"> Add new Issue</h2>
-
-    <form>
+<div class="panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Add new issue</h3>
+    </div>
+    <form name="addIssueForm">
         <div class="form-group">
             <label for="inputTitle">Title</label>
-            <input id="inputTitle" type="text" class="form-control" ng-model="issue.title" placeholder="Issue Title"
-                   set-key-from-text="issue.issueKey" required="required">
+            <input id="inputTitle" type="text" class="form-control" ng-model="issue.Title" placeholder="Issue Title"
+                   set-key-from-text="issue.IssueKey" required="required">
         </div>
         <div class="form-group">
             <label for="inputAssignee">Assignee</label>
-            <select id="inputAssignee" class="form-control" ng-model="issue.assigneeId">
-                <option>Kircho</option>
-                <option>Petkancho</option>
+            <select id="inputAssignee" class="form-control" ng-model="issue.AssigneeId">
+                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="inputProject">Project</label>
-            <select id="inputProject" class="form-control" ng-model="issue.projectId">
+            <select id="inputProject" class="form-control" ng-model="issue.ProjectId">
                 <option>SIT</option>
                 <option>Cart Management</option>
             </select>
@@ -24,31 +24,34 @@
         <div class="form-group">
             <label for="inputIssueKey">Issue Key</label>
             <input id="inputIssueKey" type="text" class="form-control" placeholder="Issue Key"
-                   ng-model="issue.issueKey" disabled>
+                   ng-model="issue.IssueKey" disabled>
         </div>
         <div class="form-group">
             <label for="inputPriority">Priority</label>
-            <select id="inputPriority" class="form-control" ng-model="issue.priorityId">
+            <select id="inputPriority" class="form-control" ng-model="issue.PriorityId">
                 <option>Urgent</option>
                 <option>Medium</option>
             </select>
         </div>
         <div class="form-group">
             <label for="inputDueDate">Due Date</label>
-            <input id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" ng-model="issue.dueDate"
+            <input id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" ng-model="issue.DueDate"
                    required="required">
         </div>
         <div class="form-group">
-            <label for="inputLabel">Labels (comma separated)</label>
-            <input id="inputLabel" type="text" class="form-control" placeholder="Labels" value="Soft"
-                   ng-model="issue.labels">
-            <br>
+            <label for="inputLabels">Labels (comma separated)</label>
+            <input ng-model="issue.Labels" input-label-suggest-list="labels" type="text" list="labelsList"
+                   class="form-control" id="inputLabels"
+                   placeholder="Labels">
+            <datalist id="labelsList">
+                <option ng-repeat="label in labels" value="{{ label.Name}}"></option>
+            </datalist>
         </div>
         <div class="form-group">
             <label for="inputDescription">Description</label>
             <textarea id="inputDescription" class="form-control" placeholder="Description"
-                      ng-model="issue.description" required="required"></textarea>
+                      ng-model="issue.Description" required="required"></textarea>
         </div>
-        <button type="submit" class="btn btn-success" ng-click="addIssue(issue)">Add Issue</button>
+        <button type="submit" class="btn btn-success" ng-click="addIssue(issue)" ng-disabled="addIssueForm.$invalid">Add Issue</button>
     </form>
 </div>
