@@ -1,18 +1,10 @@
-app.directive('setKeyFromText', ['$parse', function ($parse) {
+app.directive('setKeyFromText', ['$parse', '$filter', function ($parse, $filter) {
     return {
         restrict: 'A',
         link: function ($scope, element, attr) {
             element.bind("change", function (e) {
-                var projectName = e.target.value,
-                    words = projectName.trim().split(/\s+/),
-                    projectKey = "";
-                words.forEach(function (word) {
-                    var c = word.charAt(0);
-                    if (c.toLowerCase() != c.toUpperCase()) {
-                        projectKey += c;
-                    }
-                });
-                var model = $parse(attr.setKeyFromText);
+                var projectKey = $filter('keyFromText')( e.target.value),
+                    model = $parse(attr.setKeyFromText);
                 model.assign($scope, projectKey);
                 $scope.$apply();
             });

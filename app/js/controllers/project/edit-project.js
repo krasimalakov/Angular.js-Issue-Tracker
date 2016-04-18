@@ -28,7 +28,6 @@ app.controller('ProjectController.EditProject', [
             project.Labels=$filter('joinArrayProperty')(project.Labels, 'Name');
             project.Priorities=$filter('joinArrayProperty')(project.Priorities, 'Name');
             $scope.project = project;
-            console.log(project);
         }, function (error) {
             notifyService.showError('Get project Id='+$routeParams.id+' request failed !', error);
         });

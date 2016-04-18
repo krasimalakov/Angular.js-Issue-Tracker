@@ -16,17 +16,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Bad Request has no message describing the problem</td>
-                    <td>SIT</td>
-                    <td>28/03/2016</td>
+                <tr ng-repeat="issue in issues">
+                    <td>{{issue.Title}}</td>
+                    <td>{{issue.Project.Name|keyFromText}}</td>
+                    <td>{{issue.DueDate|date:"dd.MM.yyyy"}}</td>
                 </tr>
 
                 </tbody>
             </table>
         </div>
-        <div pagination ng-if="pagination.maxSize>pagination.pageSize" ng-model="pagination.startPage"
-             items-per-page="pagination.pageSize" total-items="pagination.maxSize"
+        <div pagination ng-if="paginationIssue.maxSize>paginationIssue.pageSize" ng-model="paginationIssue.startPage"
+             items-per-page="paginationIssue.pageSize" total-items="paginationIssue.maxSize"
              ng-change="selectProjectToView()" max-size="9" boundary-links="true"></div>
     </div>
     <div class="dashboard-panel dashboard-panel-right">
@@ -49,8 +49,9 @@
                 </tbody>
             </table>
         </div>
-        <div pagination ng-if="pagination.maxSize>pagination.pageSize" ng-model="pagination.startPage"
-             items-per-page="pagination.pageSize" total-items="pagination.maxSize"
+        <div pagination ng-if="paginationProjects.maxSize>paginationProjects.pageSize"
+             ng-model="paginationProjects.startPage"
+             items-per-page="paginationProjects.pageSize" total-items="paginationProjects.maxSize"
              ng-change="selectProjectToView()" max-size="9" boundary-links="true"></div>
     </div>
     <div>

@@ -9,9 +9,9 @@ app.factory('issueService', [
 
         function getMyIssues(pageSize, pageNumber, orderBy) {
             var deferred = $q.defer();
-            var filter='pageSize='+pageSize+'&pageNumber='+pageNumber+'&orderBy='+orderBy;
-            $http.get(baseUrl+'Issues/me?'+filter).then(function (issues) {
-                deferred.resolve(issues);
+            var filter='orderBy=Project.Name desc, IssueKey'+'&pageSize='+(pageSize?pageSize:'')+'&pageNumber='+(pageNumber?pageNumber:'');
+            $http.get(baseUrl+'Issues/me?'+filter).then(function (respone) {
+                deferred.resolve(respone.data);
             }, function (error) {
                 deferred.reject(error.data);
             });
