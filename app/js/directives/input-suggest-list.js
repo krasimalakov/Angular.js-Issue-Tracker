@@ -1,4 +1,4 @@
-app.directive('inputLabelSuggestList', ['$parse', function ($parse) {
+app.directive('inputLabelSuggestList', [function () {
     return {
         restrict: 'A',
         link: function ($scope, element, attr) {

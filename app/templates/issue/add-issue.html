@@ -30,14 +30,14 @@
         </div>
         <div class="form-group">
             <label for="inputPriority">Priority</label>
-            <select id="inputPriority" class="form-control" ng-model="issue.PriorityId">
-                <option value="0">Urgent</option>
-                <option value="1">Medium</option>
+            <select project-priories-list="{{issue.ProjectId}}" ng-model="issue.PriorityId"
+                    ng-options="priority.Id as priority.Name for priority in priorities" id="inputPriority" class="form-control">
             </select>
         </div>
         <div class="form-group">
             <label for="inputDueDate">Due Date</label>
-            <input datepicker id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd" ng-model="issue.DueDate"
+            <input datepicker id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd"
+                   ng-model="issue.DueDate"
                    required="required">
         </div>
         <div class="form-group">
