@@ -9,8 +9,18 @@ app.factory('issueService', [
 
         function getMyIssues(pageSize, pageNumber, orderBy) {
             var deferred = $q.defer();
-            var filter='orderBy=Project.Name desc, IssueKey'+'&pageSize='+(pageSize?pageSize:'')+'&pageNumber='+(pageNumber?pageNumber:'');
-            $http.get(baseUrl+'Issues/me?'+filter).then(function (respone) {
+            var filter = 'orderBy=Project.Name desc, IssueKey' + '&pageSize=' + (pageSize ? pageSize : '') + '&pageNumber=' + (pageNumber ? pageNumber : '');
+            $http.get(baseUrl + 'Issues/me?' + filter).then(function (respone) {
+                deferred.resolve(respone.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
+        function getIssue(id) {
+            var deferred = $q.defer();
+            $http.get(baseUrl + 'Issues/' + id).then(function (respone) {
                 deferred.resolve(respone.data);
             }, function (error) {
                 deferred.reject(error.data);
@@ -41,6 +51,7 @@ app.factory('issueService', [
 
         return {
             getMyIssues: getMyIssues,
+            getIssue: getIssue,
             addIssue: addIssue,
             updateIssue: updateIssue
         }

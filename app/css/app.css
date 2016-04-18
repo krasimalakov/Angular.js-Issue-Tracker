@@ -114,3 +114,6 @@ ul.pagination {
 .row-offset{
     margin-top: 30px;
 }
+.offset10px{
+    margin-right: 10px;
+}

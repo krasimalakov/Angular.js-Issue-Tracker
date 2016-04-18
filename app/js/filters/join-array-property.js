@@ -5,6 +5,6 @@ app.filter('joinArrayProperty', function () {
         items.forEach(function (item) {
             result+=eval('item.'+input)+',';
         });
-        return result.slice(0,-2);
+        return result.slice(0,-1);
     }
 });
