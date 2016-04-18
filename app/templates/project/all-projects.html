@@ -14,12 +14,15 @@
         <tbody>
         <tr ng-repeat="project in projects">
             <td>{{project.ProjectKey}}</td>
-            <td>{{project.Name}}</td>
-            <td ng-if="project.Lead.Id==userService.getCurrentUser().id">
-                <a href="#/projects/{{project.Id}}/edit"class="text-center btn btn-sm btn-primary" ng-click="">Edit</a>
+            <td><a href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
+            <td>
+                <a ng-if="project.Lead.Id==userService.getCurrentUser().id" href="#/projects/{{project.Id}}/edit"
+                   class="text-center btn btn-sm btn-smalest btn-primary" ng-click="">Edit</a>
             </td>
-            <td ng-if="project.Lead.Id==userService.getCurrentUser().id">
-                <a href="#/projects/{{project.Id}}/add-issue" class="text-center btn btn-sm btn-warning" ng-click="">Add issue</a>
+            <td>
+                <a ng-if="project.Lead.Id==userService.getCurrentUser().id" href="#/projects/{{project.Id}}/add-issue"
+                   class="text-center btn btn-sm  btn-smalest btn-warning" ng-click="">Add
+                    issue</a>
             </td>
         </tr>
         </tbody>

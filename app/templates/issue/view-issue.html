@@ -48,16 +48,17 @@
                 {{issue.Status.Name}}
             </td>
         </tr>
-        <tr>
+        <tr ng-if="issue.Assignee.Id==userService.getCurrentUser().id">
             <td>Set status to:</td>
             <td>
-                <button ng-if="issue.Assignee.Id==userService.getCurrentUser().id"
-                        ng-repeat="status in issue.AvailableStatuses" class="btn btn-sm btn-warning offset10px">
+                <button ng-repeat="status in issue.AvailableStatuses"
+                        class="btn btn-sm btn-smalest btn-warning offset10px">
                     {{status.Name}}
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="#/" ng-if="userService.isAdmin()" class="btn btn-primary">Edit Issue</a>
+    <a href="#/" ng-if="issue.LeadId==userService.getCurrentUser().id"
+       class="btn btn-primary">Edit Issue</a>
 </div>

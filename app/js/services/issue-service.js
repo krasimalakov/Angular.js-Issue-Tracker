@@ -20,8 +20,18 @@ app.factory('issueService', [
 
         function getIssue(id) {
             var deferred = $q.defer();
-            $http.get(baseUrl + 'Issues/' + id).then(function (respone) {
-                deferred.resolve(respone.data);
+            $http.get(baseUrl + 'Issues/' + id).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
+        function getProjectIssues(projectId) {
+            var deferred = $q.defer();
+            $http.get(baseUrl + 'Projects/' + projectId + '/Issues').then(function (response) {
+                deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
             });
@@ -52,6 +62,7 @@ app.factory('issueService', [
         return {
             getMyIssues: getMyIssues,
             getIssue: getIssue,
+            getProjectIssues: getProjectIssues,
             addIssue: addIssue,
             updateIssue: updateIssue
         }

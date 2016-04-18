@@ -46,12 +46,11 @@ app.factory('projectService', [
 
         function updateProject(project) {
             var deferred = $q.defer();
-            $http.put(baseUrl + 'Projects/'+project.Id, project).then(function (response) {
+            $http.put(baseUrl + 'Projects/' + project.Id, project).then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
             });
-
             return deferred.promise;
         }
 
@@ -59,6 +58,6 @@ app.factory('projectService', [
             getProjects: getProjects,
             getMyProjects: getMyProjects,
             addProject: addProject,
-            updateProject: updateProject
+            updateProject: updateProject,
         }
     }]);

@@ -12,12 +12,16 @@ app.controller('IssueController.ViewIssue', [
     function ($scope, $location, $routeParams, notifyService, userService, labelService, projectService, issueService) {
         userService.denyNotloggedUser();
 
-        var issueId=$routeParams.id;
+        var issueId = $routeParams.id;
         issueService.getIssue(issueId).then(function (issue) {
-            $scope.issue=issue;
-            console.log(issue);
+            projectService.getProjects(issue.Project.Id).then(function (project) {
+                issue.LeadId = project.Lead.Id;
+                $scope.issue = issue;
+            }, function (error) {
+                notifyService.showError('Get project id=' + issue.Project.Id + ' failed !', error);
+            });
         }, function (error) {
-            notifyService.showError('Get issue id='+issueId+' failed !', error);
+            notifyService.showError('Get issue id=' + issueId + ' failed !', error);
         });
 
     }]);

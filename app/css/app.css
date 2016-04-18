@@ -25,31 +25,6 @@ select.ng-invalid-required {
     background-repeat: no-repeat;
 }
 
-.btn-file {
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
-}
-
-.edit-profile-img {
-    width: 100%;
-}
-
 #isAdminCheckbox {
     padding: 10px 15px 10px 100px;
 }
@@ -63,12 +38,12 @@ ul.pagination {
     display: table;
     margin: 0 auto;
     font-size: 11px;
-    padding:2px;
+    padding: 2px;
 }
 
 .pagination > li > a,
-.pagination > li > span{
-    padding:0 5px;
+.pagination > li > span {
+    padding: 0 5px;
 }
 
 .pagination {
@@ -81,9 +56,10 @@ ul.pagination {
     background-color: #F9F9F9;
 }
 
-.panel-title:before{
+.panel-title:before {
     content: 'Issue Tracker - ';
 }
+
 .panel-title {
     margin: 10px auto;
     font-size: 24px;
@@ -111,9 +87,23 @@ ul.pagination {
     height: 80%;
 }
 
-.row-offset{
+.row-offset {
     margin-top: 30px;
 }
-.offset10px{
+
+.row-offset15px {
+    margin-top: 15px;
+}
+
+.offset10px {
     margin-right: 10px;
+}
+
+.set-backgound {
+    background-color: #faf2da;
+    border-radius: 5px;
+}
+
+.btn-smalest{
+    padding: 0px 5px;
 }

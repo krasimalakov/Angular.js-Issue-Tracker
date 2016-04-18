@@ -13,7 +13,7 @@ app.controller('DashboardController', [
         projectService.getMyProjects().then(function (projects) {
             $scope.paginationProjects = {
                 'startPage': 1,
-                'pageSize': 3,
+                'pageSize': 8,
                 'maxSize': projects.length
             };
 
@@ -29,17 +29,17 @@ app.controller('DashboardController', [
         });
         $scope.paginationIssue = {
             'startPage': 1,
-            'pageSize': 3,
-            'maxSize': 999999
+            'pageSize': 1,
+            'maxSize': 999
         };
-        issueService.getMyIssues($scope.paginationIssue.pageSize, $scope.paginationIssue.startPage).then(function (data) {
-            $scope.paginationIssue.maxSize=$scope.paginationIssue.pageSize*data.TotalPages;
+        $scope.selectIssuesToView= function () {
+            issueService.getMyIssues($scope.paginationIssue.pageSize, $scope.paginationIssue.startPage).then(function (data) {
+                $scope.paginationIssue.maxSize=$scope.paginationIssue.pageSize*data.TotalPages;
+                $scope.issues=data.Issues;
+            }, function (error) {
+                notifyService.showError('Get issues request failed !', error);
+            });
+        };
 
-            $scope.issues=data.Issues;
-            console.log(data);
-
-        }, function (error) {
-            notifyService.showError('Get issues request failed !', error);
-        });
-
+        $scope.selectIssuesToView();
     }]);

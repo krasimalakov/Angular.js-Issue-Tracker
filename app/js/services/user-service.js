@@ -122,6 +122,17 @@ app.factory('userService', [
             return deferred.promise;
         }
 
+        function getAllUsers() {
+            setAuthorizationHeaders();
+            var deferred = $q.defer();
+            $http.get(baseUrl + 'users').then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+        
         return {
             login: login,
             register: register,

@@ -10,7 +10,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td>Issue</td>
+                    <td>Title</td>
                     <td>Project</td>
                     <td>Due Date</td>
                 </tr>
@@ -27,7 +27,7 @@
         </div>
         <div pagination ng-if="paginationIssue.maxSize>paginationIssue.pageSize" ng-model="paginationIssue.startPage"
              items-per-page="paginationIssue.pageSize" total-items="paginationIssue.maxSize"
-             ng-change="selectProjectToView()" max-size="9" boundary-links="true"></div>
+             ng-change="selectIssuesToView()" max-size="9" boundary-links="true"></div>
     </div>
     <div class="dashboard-panel dashboard-panel-right">
         <div class="panel-heading">
@@ -37,7 +37,8 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td>Project</td>
+                    <td>Key</td>
+                    <td>Name</td>
                 </tr>
                 </thead>
                 <tbody>

@@ -14,7 +14,7 @@ app.controller('ProjectController.AllProjects', [
 
             $scope.pagination = {
                 'startPage': 1,
-                'pageSize': 9,
+                'pageSize': 10,
                 'maxSize': projects.length
             };
 

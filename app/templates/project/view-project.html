@@ -5,8 +5,8 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th class="col-lg-2"/>
-            <th class="col-lg-10"/>
+            <th class="col-lg-2"></th>
+            <th class="col-lg-10"></th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +33,31 @@
         <tr>
             <td>Description</td>
             <td>{{project.Description}}</td>
+        </tr>
+        <tr>
+            <td>Issues</td>
+            <td ng-if="issues.length>0">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="col-lg-6">Title</th>
+                        <th class="col-lg-4">Assignee</th>
+                        <th class="col-lg-1">Priority</th>
+                        <th class="col-lg-1">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="issue in issues">
+                        <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                        <td>{{issue.Assignee.Username}}</td>
+                        <td>{{issue.Priority.Name}}</td>
+                        <td>{{issue.Status.Name}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+            <td ng-if="issues.length==0">No issues</td>
         </tr>
         </tbody>
     </table>
