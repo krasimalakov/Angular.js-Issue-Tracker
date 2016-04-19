@@ -59,6 +59,6 @@
         </tr>
         </tbody>
     </table>
-    <a href="#/issues/{{issue.Id}}/edit" ng-if="issue.LeadId==userService.getCurrentUser().id"
+    <a href="#/issues/{{issue.Id}}/edit" ng-if="(issue.LeadId==userService.getCurrentUser().id)||(issue.Assignee.Id==userService.getCurrentUser().id)"
        class="btn btn-primary">Edit Issue</a>
 </div>

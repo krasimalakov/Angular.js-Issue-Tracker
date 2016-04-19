@@ -28,12 +28,18 @@ app.controller('IssueController.EditIssue', [
         var issueId = $routeParams.id;
         issueService.getIssue(issueId).then(function (issue) {
             projectService.getProjects(issue.Project.Id).then(function (project) {
+                var currentUserId=userService.getCurrentUser().id;
+                if ((currentUserId!=project.Lead.Id)&&(currentUserId!=issue.Assignee.Id)){
+                    $location.path('/');
+                }
                 $scope.priorities = project.Priorities;
+                $scope.isProjectLeader= project.Lead.Id==currentUserId;
                 issue.LeadId = project.Lead.Id;
                 issue.Labels = $filter('joinArrayProperty')(issue.Labels, 'Name');
                 issue.DueDate = new Date(issue.DueDate);
                 issue.AssigneeId = issue.Assignee.Id;
                 $scope.issue = issue;
+
             }, function (error) {
                 notifyService.showError('Get project id=' + issue.Project.Id + ' failed !', error);
             });
