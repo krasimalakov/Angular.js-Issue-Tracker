@@ -6,45 +6,47 @@
         <div class="form-group">
             <label for="inputTitle">Title</label>
             <input id="inputTitle" type="text" class="form-control" ng-model="issue.Title" placeholder="Issue Title"
-                   set-key-from-text="issue.IssueKey" required="required">
+                   required="required">
         </div>
+        <!--<div class="form-group">-->
+            <!--<label for="inputAssignee">Assignee</label>-->
+            <!--<select id="inputAssignee" class="form-control" ng-model="issue.AssigneeId" required="required">-->
+                <!--<option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>-->
+            <!--</select>-->
+        <!--</div>-->
         <div class="form-group">
             <label for="inputAssignee">Assignee</label>
-            <select id="inputAssignee" class="form-control" ng-model="issue.AssigneeId">
-                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
-            </select>
+            <input ng-model="issue.AssigneeName" type="text" set-user-id-from-username="issue.AssigneeId" list="users"
+                   class="form-control" id="inputAssignee" placeholder="Assignee" required="required">
+            <datalist id="users">
+                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Username}}"></option>
+            </datalist>
+            <input ng-model="issue.AssigneeId" required="required" ng-hide="true">
         </div>
         <div class="form-group">
             <label for="inputProject">Project</label>
-            <select id="inputProject" class="form-control" ng-model="issue.ProjectId">
+            <select id="inputProject" class="form-control" ng-model="issue.ProjectId" required="required">
                 <option ng-repeat="project in projects | orderBy:'Name'" ng-selected="issue.ProjectId==project.Id"
                         value="{{project.Id}}">{{project.Name}}
                 </option>
-
             </select>
         </div>
         <div class="form-group">
-            <label for="inputIssueKey">Issue Key</label>
-            <input id="inputIssueKey" type="text" class="form-control" placeholder="Issue Key"
-                   ng-model="issue.IssueKey" disabled>
-        </div>
-        <div class="form-group">
             <label for="inputPriority">Priority</label>
-            <select project-priories-list="{{issue.ProjectId}}" ng-model="issue.PriorityId"
-                    ng-options="priority.Id as priority.Name for priority in priorities" id="inputPriority" class="form-control">
+            <select project-priories-list="{{issue.ProjectId}}" ng-model="issue.PriorityId" required="required"
+                    ng-options="priority.Id as priority.Name for priority in priorities" id="inputPriority"
+                    class="form-control">
             </select>
         </div>
         <div class="form-group">
             <label for="inputDueDate">Due Date</label>
             <input datepicker id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd"
-                   ng-model="issue.DueDate"
-                   required="required">
+                   ng-model="issue.DueDate" required="required">
         </div>
         <div class="form-group">
             <label for="inputLabels">Labels (comma separated)</label>
             <input ng-model="issue.Labels" input-label-suggest-list="labels" type="text" list="labelsList"
-                   class="form-control" id="inputLabels"
-                   placeholder="Labels">
+                   class="form-control" id="inputLabels" placeholder="Labels" required="required">
             <datalist id="labelsList">
                 <option ng-repeat="label in labels" value="{{ label.Name}}"></option>
             </datalist>

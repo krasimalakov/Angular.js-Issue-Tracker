@@ -17,6 +17,7 @@ input.ng-valid {
 }
 
 input.ng-invalid-required,
+input.non-valid-user,
 textarea.ng-invalid-required,
 select.ng-invalid-required {
     background-image: radial-gradient(red 20%, transparent 60%);
