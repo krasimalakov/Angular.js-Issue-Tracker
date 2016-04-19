@@ -44,3 +44,7 @@ My advanced features:
 ====================
 -> pagination
 	-> user setings page size
+	
+	
+липсващи статуси
+лидера задължителен

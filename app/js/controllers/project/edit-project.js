@@ -25,31 +25,39 @@ app.controller('ProjectController.EditProject', [
         });
 
         projectService.getProjects($routeParams.id).then(function (project) {
-            project.Labels=$filter('joinArrayProperty')(project.Labels, 'Name');
-            project.Priorities=$filter('joinArrayProperty')(project.Priorities, 'Name');
+            if ((userService.getCurrentUser().id != project.Lead.Id) && (!userService.isAdmin())) {
+                $location.path('/');
+            }
+            project.Labels = $filter('joinArrayProperty')(project.Labels, 'Name');
+            project.Priorities = $filter('joinArrayProperty')(project.Priorities, 'Name');
             $scope.project = project;
         }, function (error) {
-            notifyService.showError('Get project Id='+$routeParams.id+' request failed !', error);
+            notifyService.showError('Get project Id=' + $routeParams.id + ' request failed !', error);
         });
 
-        $scope.updateProject= function (project) {
-            var labels = project.Labels.trim().split(/\s*,\s*/);
-            project.Labels=[];
-            labels.forEach(function (label) {
-                project.Labels.push({Name:label})
-            });
-            var priorities = project.Priorities.trim().split(/\s*,\s*/);
-            project.Priorities=[];
+        $scope.updateProject = function (project) {
+            if (project.Labels != undefined) {
+                var labels = project.Labels.trim().split(/\s*,\s*/);
+                project.Labels = [];
+                labels.forEach(function (label) {
+                    project.Labels.push({Name: label})
+                });
+            }
+            if (project.Priorities != undefined) {
+                var priorities = project.Priorities.trim().split(/\s*,\s*/);
+            project.Priorities = [];
             priorities.forEach(function (priority) {
-                project.Priorities.push({Name:priority})
+                project.Priorities.push({Name: priority})
             });
-            project.LeadId=project.Lead.Id;
-            delete project.Lead;
+            } else {
+                project.Priorities = [];
+            }
+            project.LeadId = project.Lead.Id;
             projectService.updateProject(project).then(function (project) {
                 notifyService.showInfo('Project update is successfully !');
                 $location.path('/');
             }, function (error) {
-                notifyService.showError('Update project Id='+project.Id+' failed !', error);
+                notifyService.showError('Update project Id=' + project.Id + ' failed !', error);
             });
         }
     }]);

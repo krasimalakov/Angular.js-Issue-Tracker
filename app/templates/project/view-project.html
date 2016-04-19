@@ -72,5 +72,5 @@
     <a ng-if="project.Lead.Id==userService.getCurrentUser().id" href="#/projects/{{project.Id}}/add-issue"
        class="btn btn-warning" ng-click="">Add issue</a>
     <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-warning">Add New Project</a>
-    <a href="#/projects/{{project.Id}}/edit" ng-if="userService.isAdmin()" class="btn btn-primary">Edit Project</a>
+    <a href="#/projects/{{project.Id}}/edit" ng-if="userService.isAdmin()||userService.getCurrentUser().id==project.Lead.Id" class="btn btn-primary">Edit Project</a>
 </div>

@@ -23,18 +23,29 @@ app.controller('ProjectController.AddProject', [
         });
 
         $scope.addProject = function (project) {
-            var labels = project.labels.trim().split(/\s*,\s*/);
-            project.labels=[];
-            labels.forEach(function (label) {
-                project.labels.push({Name:label})
-            });
-            
-            var priorities = project.priorities.trim().split(/\s*,\s*/);
-            project.priorities=[];
-            priorities.forEach(function (priority) {
-                project.priorities.push({Name:priority})
-            });
+            if (project.labels != undefined) {
+                var labels = project.labels.split(/\s*,\s*/);
+                project.labels = [];
+                labels.forEach(function (label) {
+                    project.labels.push({Name: label})
+                });
+            }
+            if (project.priorities != undefined) {
+                var priorities = project.priorities.split(/\s*,\s*/);
+                project.priorities = [];
+                priorities.forEach(function (priority) {
+                    project.priorities.push({Name: priority})
+                });
+            } else {
+                project.priorities = [];
+            }
+            // if (project.LeadId == undefined) {
+            //     project.LeadId='';
+            // }
+            console.log(project);
             projectService.addProject(project).then(function (result) {
+                console.log(project);
+
                 notifyService.showInfo('Project is added successfully !');
                 $location.path('/');
             }, function (error) {

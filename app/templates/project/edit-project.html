@@ -9,14 +9,24 @@
             <input ng-model="project.Name" type="text" class="form-control" id="inputProjectName"
                    set-key-from-text="project.ProjectKey" placeholder="Project Name" required="required">
         </div>
+        <!--<div class="form-group">-->
+        <!--<label for="inputLeader">Leader</label>-->
+        <!--<select ng-model="project.Lead.Id" id="inputLeader" class="form-control" ng-disabled="!userService.isAdmin()">-->
+        <!--<option ng-repeat="user in users | orderBy:'Username'"-->
+        <!--title="{{user.Username}}"-->
+        <!--ng-selected="user.Id == project.Lead.Id" value="{{user.Id}}">{{user.Username}}-->
+        <!--</option>-->
+        <!--</select>-->
+        <!--</div>-->
         <div class="form-group">
             <label for="inputLeader">Leader</label>
-            <select ng-model="project.Lead.Id" id="inputLeader" class="form-control">
-            <option ng-repeat="user in users | orderBy:'Username'"
-                    title="{{user.Username}}"
-                    ng-selected="user.Id == project.Lead.Id" value="{{user.Id}}">{{user.Username}}
-            </option>
-            </select>
+            <input ng-model="project.Lead.Username" type="text" set-user-id-from-username="project.Lead.Id"
+                   list="users" class="form-control" id="inputLeader" placeholder="Leader" required="required"
+                   ng-disabled="!userService.isAdmin()">
+            <datalist id="users">
+                <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Username}}"></option>
+            </datalist>
+            <input ng-model="project.Lead.Id" required="required" ng-hide="true">
         </div>
         <div class="form-group">
             <label for="inputProjectKey">Project Key</label>
