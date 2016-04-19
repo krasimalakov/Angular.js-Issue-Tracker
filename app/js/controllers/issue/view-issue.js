@@ -24,4 +24,11 @@ app.controller('IssueController.ViewIssue', [
             notifyService.showError('Get issue id=' + issueId + ' failed !', error);
         });
 
+        $scope.changeIssueStatus= function (statusId) {
+            issueService.changeIssueStatus(issueId, statusId).then(function (statuses) {
+                $scope.issue.AvailableStatuses=statuses;
+            }, function (error) {
+                notifyService.showError('Change status to issue id=' + issueId + ' failed !', error);
+            });
+        }
     }]);

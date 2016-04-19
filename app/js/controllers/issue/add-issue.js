@@ -32,15 +32,11 @@ app.controller('IssueController.AddIssue', [
         $scope.issue={};
         $scope.issue.ProjectId=$routeParams.id;
         $scope.addIssue = function (issue) {
-
-            console.log(issue);
-
             var labels = issue.Labels.trim().split(/\s*,\s*/);
             issue.Labels=[];
             labels.forEach(function (label) {
                 issue.Labels.push({Name:label})
             });
-
             issueService.addIssue(issue).then(function (result) {
                 notifyService.showInfo('Issue is added successfully !');
                 $location.path('/');

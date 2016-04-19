@@ -29,7 +29,7 @@ app.controller('DashboardController', [
         });
         $scope.paginationIssue = {
             'startPage': 1,
-            'pageSize': 1,
+            'pageSize': 8,
             'maxSize': 999
         };
         $scope.selectIssuesToView= function () {

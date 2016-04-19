@@ -48,11 +48,11 @@
                 {{issue.Status.Name}}
             </td>
         </tr>
-        <tr ng-if="issue.Assignee.Id==userService.getCurrentUser().id">
+        <tr ng-if="(issue.Assignee.Id==userService.getCurrentUser().id)&&(issue.AvailableStatuses.length>0)">
             <td>Set status to:</td>
             <td>
                 <button ng-repeat="status in issue.AvailableStatuses"
-                        class="btn btn-sm btn-smalest btn-warning offset10px">
+                        class="btn btn-sm btn-smalest btn-warning offset10px" ng-click="changeIssueStatus(status.Id)">
                     {{status.Name}}
                 </button>
             </td>

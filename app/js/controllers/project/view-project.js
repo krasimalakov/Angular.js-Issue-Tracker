@@ -32,5 +32,4 @@ app.controller('ProjectController.ViewProject', [
             $scope.issues = $scope.allIssues.slice(($scope.paginationIssue.startPage - 1) * $scope.paginationIssue.pageSize,
                 $scope.paginationIssue.startPage * $scope.paginationIssue.pageSize);
         };
-
     }]);

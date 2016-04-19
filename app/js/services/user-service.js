@@ -43,7 +43,6 @@ app.factory('userService', [
         }
 
         function setAdminPermission(userId) {
-            console.log(userId);
             setAuthorizationHeaders();
             var deferred = $q.defer();
             $http.put(baseUrl + 'users/makeadmin', {UserId: userId}).then(function (response) {

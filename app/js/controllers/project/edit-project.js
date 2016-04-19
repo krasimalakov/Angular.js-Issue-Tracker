@@ -45,7 +45,6 @@ app.controller('ProjectController.EditProject', [
             });
             project.LeadId=project.Lead.Id;
             delete project.Lead;
-            console.log(project);
             projectService.updateProject(project).then(function (project) {
                 notifyService.showInfo('Project update is successfully !');
                 $location.path('/');

@@ -13,6 +13,7 @@
                     <td>Title</td>
                     <td>Project</td>
                     <td>Due Date</td>
+                    <td>Status</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                     <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
                     <td>{{issue.Project.Name|keyFromText}}</td>
                     <td>{{issue.DueDate|date:"dd.MM.yyyy"}}</td>
+                    <td>{{issue.Status.Name}}</td>
                 </tr>
 
                 </tbody>

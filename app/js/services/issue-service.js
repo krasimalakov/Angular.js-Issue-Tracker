@@ -59,11 +59,23 @@ app.factory('issueService', [
             return deferred.promise;
         }
 
+        function changeIssueStatus(issueId, statusId) {
+            var deferred = $q.defer();
+            $http.put(baseUrl + 'Issues/' + issueId+'/changestatus?statusid='+statusId).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+
+            return deferred.promise;
+        }
+
         return {
             getMyIssues: getMyIssues,
             getIssue: getIssue,
             getProjectIssues: getProjectIssues,
             addIssue: addIssue,
-            updateIssue: updateIssue
+            updateIssue: updateIssue,
+            changeIssueStatus: changeIssueStatus
         }
     }]);
