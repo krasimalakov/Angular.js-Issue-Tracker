@@ -1,23 +1,17 @@
 <div class="panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Add new issue</h3>
+        <h3 class="panel-title">Edit issue</h3>
     </div>
-    <form name="addIssueForm">
+    <form name="editIssueForm">
         <div class="form-group">
             <label for="inputTitle">Title</label>
             <input id="inputTitle" type="text" class="form-control" ng-model="issue.Title" placeholder="Issue Title"
                    required="required">
         </div>
-        <!--<div class="form-group">-->
-            <!--<label for="inputAssignee">Assignee</label>-->
-            <!--<select id="inputAssignee" class="form-control" ng-model="issue.AssigneeId" required="required">-->
-                <!--<option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>-->
-            <!--</select>-->
-        <!--</div>-->
         <div class="form-group">
             <label for="inputAssignee">Assignee</label>
-            <input ng-model="issue.AssigneeName" type="text" set-user-id-from-username="issue.AssigneeId" list="users"
-                   class="form-control" id="inputAssignee" placeholder="Assignee" required="required">
+            <input ng-model="issue.Assignee.Username" type="text" set-user-id-from-username="issue.AssigneeId"
+                   list="users" class="form-control" id="inputAssignee" placeholder="Assignee" required="required">
             <datalist id="users">
                 <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Username}}"></option>
             </datalist>
@@ -25,17 +19,13 @@
         </div>
         <div class="form-group">
             <label for="inputProject">Project</label>
-            <select id="inputProject" class="form-control" ng-model="issue.ProjectId" required="required">
-                <option ng-repeat="project in projects | orderBy:'Name'" ng-selected="issue.ProjectId==project.Id"
-                        value="{{project.Id}}">{{project.Name}}
-                </option>
-            </select>
+            <input ng-model="issue.Project.Name" id="inputProject" type="text" class="form-control" required="required"
+                   disabled>
         </div>
         <div class="form-group">
             <label for="inputPriority">Priority</label>
-            <select project-priorities-list="{{issue.ProjectId}}" ng-model="issue.PriorityId" required="required"
-                    ng-options="priority.Id as priority.Name for priority in priorities" id="inputPriority"
-                    class="form-control">
+            <select ng-model="issue.Priority.Id" id="inputPriority" class="form-control"
+                    ng-options="priority.Id as priority.Name for priority in priorities" required="required">
             </select>
         </div>
         <div class="form-group">
@@ -56,8 +46,27 @@
             <textarea id="inputDescription" class="form-control" placeholder="Description"
                       ng-model="issue.Description" required="required"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" ng-click="addIssue(issue)" ng-disabled="addIssueForm.$invalid">
-            Add Issue
+        <div class="col-lg-10 offset-0px">
+            <div class="col-lg-3 offset-0px">
+                <strong>Status:</strong>
+                <span>{{issue.Status.Name}}</span>
+            </div>
+            <div ng-if="(issue.Assignee.Id==userService.getCurrentUser().id)&&(issue.AvailableStatuses.length>0)" class="col-lg-9">
+                <div class="col-lg-3">
+                    <strong>Set status to:</strong>
+                </div>
+                <div class="col-lg-8">
+                    <button ng-repeat="status in issue.AvailableStatuses"
+                            class="btn btn-sm btn-smalest btn-warning offset-10px"
+                            ng-click="changeIssueStatus(status.Id)">
+                        {{status.Name}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="updateIssue(issue)"
+                ng-disabled="editIssueForm.$invalid">
+            Update Issue
         </button>
     </form>
 </div>

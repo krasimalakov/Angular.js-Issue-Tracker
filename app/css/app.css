@@ -88,15 +88,19 @@ ul.pagination {
     height: 80%;
 }
 
-.row-offset {
+.row-offset-30px {
     margin-top: 30px;
 }
 
-.row-offset15px {
+.row-offset-15px {
     margin-top: 15px;
 }
 
-.offset10px {
+.offset-0px {
+    margin-right: 0;
+    padding-left: 0;
+}
+.offset-10px {
     margin-right: 10px;
 }
 

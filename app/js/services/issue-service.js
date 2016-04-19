@@ -48,9 +48,9 @@ app.factory('issueService', [
             return deferred.promise;
         }
 
-        function updateIssue(issue) {
+        function updateIssue(issueId, issueData) {
             var deferred = $q.defer();
-            $http.put(baseUrl + 'Issues/' + issue.Id, issue).then(function (response) {
+            $http.put(baseUrl + 'Issues/' + issueId, issueData).then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);

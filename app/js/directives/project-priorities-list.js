@@ -1,9 +1,9 @@
-app.directive('projectPrioriesList', ['projectService', function (projectService) {
+app.directive('projectPrioritiesList', ['projectService', function (projectService) {
     return {
         restrict: 'A',
         link: function ($scope, element, attrs) {
             element.bind("focus", function (e) {
-                projectService.getProjects(attrs.projectPrioriesList).then(function (project) {
+                projectService.getProjects(attrs.projectPrioritiesList).then(function (project) {
                     $scope.priorities=project.Priorities;
                 });
             });

@@ -3,7 +3,7 @@
         <h3 class="panel-title">Set user admin permission</h3>
     </div>
     <form name="setAdminPermissionForm" class="form-horizontal col-lg-4 col-lg-offset-4">
-        <div class="form-group row-offset">
+        <div class="form-group row-offset-30px">
             <label for="inputUsеrId">User</label>
             <select ng-model="userId" id="inputUsеrId" class="form-control" required>
                 <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}

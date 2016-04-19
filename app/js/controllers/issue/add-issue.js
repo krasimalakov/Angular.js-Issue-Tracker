@@ -37,6 +37,7 @@ app.controller('IssueController.AddIssue', [
             labels.forEach(function (label) {
                 issue.Labels.push({Name:label})
             });
+            issue.AssigneeId=issue.Assignee.Id;
             issueService.addIssue(issue).then(function (result) {
                 notifyService.showInfo('Issue is added successfully !');
                 $location.path('/');

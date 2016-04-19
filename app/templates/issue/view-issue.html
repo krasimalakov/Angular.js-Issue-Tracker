@@ -5,8 +5,8 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th class="col-lg-2"/>
-            <th class="col-lg-10"/>
+            <th class="col-lg-2"></th>
+            <th class="col-lg-10"></th>
         </tr>
         </thead>
         <tbody>
@@ -52,13 +52,13 @@
             <td>Set status to:</td>
             <td>
                 <button ng-repeat="status in issue.AvailableStatuses"
-                        class="btn btn-sm btn-smalest btn-warning offset10px" ng-click="changeIssueStatus(status.Id)">
+                        class="btn btn-sm btn-smalest btn-warning offset-10px" ng-click="changeIssueStatus(status.Id)">
                     {{status.Name}}
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="#/" ng-if="issue.LeadId==userService.getCurrentUser().id"
+    <a href="#/issues/{{issue.Id}}/edit" ng-if="issue.LeadId==userService.getCurrentUser().id"
        class="btn btn-primary">Edit Issue</a>
 </div>

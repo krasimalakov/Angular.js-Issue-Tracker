@@ -26,6 +26,12 @@ app.controller('IssueController.ViewIssue', [
 
         $scope.changeIssueStatus= function (statusId) {
             issueService.changeIssueStatus(issueId, statusId).then(function (statuses) {
+                $scope.issue.AvailableStatuses.forEach(function (status) {
+                    if (status.Id===statusId){
+                        $scope.issue.Status=status;
+                        return false;
+                    }
+                });
                 $scope.issue.AvailableStatuses=statuses;
             }, function (error) {
                 notifyService.showError('Change status to issue id=' + issueId + ' failed !', error);
