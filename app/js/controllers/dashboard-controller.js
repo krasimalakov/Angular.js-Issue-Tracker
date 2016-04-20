@@ -12,7 +12,7 @@ app.controller('DashboardController', [
 
         $scope.paginationIssue = {
             'startPage': 1,
-            'pageSize': 8,
+            'pageSize': 9,
             'maxSize': 999
         };
         $scope.selectIssuesToView = function () {
@@ -30,29 +30,25 @@ app.controller('DashboardController', [
             var issues = data.Issues,
                 issuesProjectsId = [];
             issues.forEach(function (issue) {
-                    if (issuesProjectsId.indexOf(issue.Project.Id) < 0)
-                        issuesProjectsId.push(issue.Project.Id);
-                });
-            projectService.getMyAndAssignedProjects(issuesProjectsId).then(function (data) {
-                var projects=data.Projects;
-                console.log(projects.length);
-
-                $scope.paginationProjects = {
-                    'startPage': 1,
-                    'pageSize': 9,
-                    'maxSize': projects.length
-                };
-
-                $scope.selectProjectToView = function () {
-                    $scope.projects = projects.slice(($scope.paginationProjects.startPage - 1) * $scope.paginationProjects.pageSize,
-                        $scope.paginationProjects.startPage * $scope.paginationProjects.pageSize);
-                    var a='zdfzdfg';
-                };
-
-                $scope.selectProjectToView();
-
-
+                if (issuesProjectsId.indexOf(issue.Project.Id) < 0)
+                    issuesProjectsId.push(issue.Project.Id);
             });
+
+            $scope.paginationProjects = {
+                'startPage': 1,
+                'pageSize': 9,
+                'maxSize': 999
+            };
+            $scope.selectProjectToView = function () {
+                projectService.getMyAndAssignedProjects(issuesProjectsId, $scope.paginationProjects.pageSize, $scope.paginationProjects.startPage)
+                    .then(function (data) {
+                        $scope.projects = data.Projects;
+                        $scope.paginationProjects.maxSize=data.TotalCount;
+                    });
+            };
+
+
+            $scope.selectProjectToView();
         }, function (error) {
             notifyService.showError('Get my issues request failed !', error);
         });

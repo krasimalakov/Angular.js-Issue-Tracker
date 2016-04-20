@@ -44,14 +44,14 @@ app.factory('projectService', [
             return deferred.promise;
         }
 
-        function getMyAndAssignedProjects(projectsId) {
+        function getMyAndAssignedProjects(issuesProjectsId, pageSize, pageNumber) {
             var deferred = $q.defer(),
                 currentUserId = userService.getCurrentUser().id,
-                filterUrl = 'filter=Lead.Id="' + currentUserId+'"';
-            for (var i = 0; i < projectsId.length; i++) {
-                filterUrl+=' or Id=='+projectsId[i];
+                filterUrl = 'filter=Lead.Id="' + currentUserId + '"';
+            for (var i = 0; i < issuesProjectsId.length; i++) {
+                filterUrl += ' or Id==' + issuesProjectsId[i];
             }
-            filterUrl += '&pageSize=1000000&pageNumber=1';
+            filterUrl += '&pageSize=' + pageSize + '&pageNumber=' + pageNumber;
             $http.get(baseUrl + 'projects?' + filterUrl).then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
