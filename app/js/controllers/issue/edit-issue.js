@@ -76,8 +76,9 @@ app.controller('IssueController.EditIssue', [
                     }
                 });
                 $scope.issue.AvailableStatuses=statuses;
+                notifyService.showInfo('Change issue status is successful !');
             }, function (error) {
-                notifyService.showError('Change status to issue id=' + issueId + ' failed !', error);
+                notifyService.showError('Change issue id=' + issueId + 'status failed !', error);
             });
         }
     }]);
