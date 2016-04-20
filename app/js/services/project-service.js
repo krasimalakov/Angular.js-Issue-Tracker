@@ -7,9 +7,9 @@ app.factory('projectService', [
     'userService',
     function ($http, $q, baseUrl, userService) {
 
-        function getProjects(projectId) {
+        function getProject(projectId) {
             var deferred = $q.defer();
-            $http.get(baseUrl + 'Projects/' + (projectId == undefined ? '' : projectId)).then(function (response) {
+            $http.get(baseUrl + 'Projects/' + projectId).then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
@@ -17,17 +17,43 @@ app.factory('projectService', [
             return deferred.promise;
         }
 
-        function getMyProjects(projectId) {
+        function getProjects(pageSize, pageNumber, filter) {
+            var deferred = $q.defer(),
+                filterUrl = 'filter=' + (filter ? filter : '');
+            if (pageSize != undefined) {
+                var pagination = 'pageSize=' + (pageSize ? pageSize : '') + '&pageNumber=' + (pageNumber ? pageNumber : '');
+                filterUrl += '&' + pagination;
+            }
+            $http.get(baseUrl + 'Projects?' + filterUrl).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
+        function getMyProjects() {
             var deferred = $q.defer();
-            getProjects().then(function (projects) {
-                var myProjects = [];
-                projects.forEach(function (project) {
-                    // todo: add expression for my project by my issue
-                    if (project.Lead.Id == userService.getCurrentUser().id) {
-                        myProjects.push(project);
-                    }
-                });
-                deferred.resolve(myProjects);
+            var currentUserId = userService.getCurrentUser().id;
+            var filterUrl = 'filter=Lead.Id="' + currentUserId + '"&pageSize=1000000&pageNumber=1';
+            $http.get(baseUrl + 'projects?' + filterUrl).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
+        function getMyAndAssignedProjects(projectsId) {
+            var deferred = $q.defer(),
+                currentUserId = userService.getCurrentUser().id,
+                filterUrl = 'filter=Lead.Id="' + currentUserId+'"';
+            for (var i = 0; i < projectsId.length; i++) {
+                filterUrl+=' or Id=='+projectsId[i];
+            }
+            filterUrl += '&pageSize=1000000&pageNumber=1';
+            $http.get(baseUrl + 'projects?' + filterUrl).then(function (response) {
+                deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
             });
@@ -55,8 +81,10 @@ app.factory('projectService', [
         }
 
         return {
+            getProject: getProject,
             getProjects: getProjects,
             getMyProjects: getMyProjects,
+            getMyAndAssignedProjects: getMyAndAssignedProjects,
             addProject: addProject,
             updateProject: updateProject,
         }

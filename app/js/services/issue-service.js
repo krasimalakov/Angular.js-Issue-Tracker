@@ -4,12 +4,12 @@ app.factory('issueService', [
     '$http',
     '$q',
     'BASE_URL',
-    'userService',
-    function ($http, $q, baseUrl, userService) {
+    'projectService',
+    function ($http, $q, baseUrl, projectService) {
 
-        function getMyIssues(pageSize, pageNumber, orderBy) {
+        function getMyIssues(pageSize, pageNumber) {
             var deferred = $q.defer();
-            var filter = 'orderBy=Project.Name desc, IssueKey' + '&pageSize=' + (pageSize ? pageSize : '') + '&pageNumber=' + (pageNumber ? pageNumber : '');
+            var filter = 'orderBy=DueDate desc, IssueKey' + '&pageSize=' + (pageSize ? pageSize : 1000000) + '&pageNumber=' + (pageNumber ? pageNumber : 1);
             $http.get(baseUrl + 'Issues/me?' + filter).then(function (respone) {
                 deferred.resolve(respone.data);
             }, function (error) {
@@ -61,7 +61,7 @@ app.factory('issueService', [
 
         function changeIssueStatus(issueId, statusId) {
             var deferred = $q.defer();
-            $http.put(baseUrl + 'Issues/' + issueId+'/changestatus?statusid='+statusId).then(function (response) {
+            $http.put(baseUrl + 'Issues/' + issueId + '/changestatus?statusid=' + statusId).then(function (response) {
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);

@@ -11,7 +11,7 @@ app.controller('IssueController.EditIssue', [
     'projectService',
     'issueService',
     function ($scope, $location, $routeParams, $filter, notifyService, userService, labelService, projectService, issueService) {
-        userService.denyNotloggedUser();
+        userService.denyNotLoggedUser();
 
         userService.getAllUsers().then(function (users) {
             $scope.users = users;
@@ -27,7 +27,7 @@ app.controller('IssueController.EditIssue', [
 
         var issueId = $routeParams.id;
         issueService.getIssue(issueId).then(function (issue) {
-            projectService.getProjects(issue.Project.Id).then(function (project) {
+            projectService.getProject(issue.Project.Id).then(function (project) {
                 var currentUserId=userService.getCurrentUser().id;
                 if ((currentUserId!=project.Lead.Id)&&(currentUserId!=issue.Assignee.Id)){
                     $location.path('/');

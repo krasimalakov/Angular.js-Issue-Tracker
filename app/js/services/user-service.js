@@ -59,7 +59,12 @@ app.factory('userService', [
         }
 
         function isLogged() {
-            return sessionStorage['currentUser'] != undefined;
+            if (sessionStorage['currentUser']!=undefined){
+                var currentUser=JSON.parse(sessionStorage['currentUser']);
+                return currentUser.id !=undefined;
+            }else{
+                return false;
+            }
         }
 
         function denyNotLoggedUser() {
@@ -121,17 +126,6 @@ app.factory('userService', [
             return deferred.promise;
         }
 
-        function getAllUsers() {
-            setAuthorizationHeaders();
-            var deferred = $q.defer();
-            $http.get(baseUrl + 'users').then(function (response) {
-                deferred.resolve(response.data);
-            }, function (error) {
-                deferred.reject(error.data);
-            });
-            return deferred.promise;
-        }
-        
         return {
             login: login,
             register: register,
@@ -139,7 +133,7 @@ app.factory('userService', [
             setAdminPermission: setAdminPermission,
             isAdmin: isAdmin,
             isLogged: isLogged,
-            denyNotloggedUser: denyNotLoggedUser,
+            denyNotLoggedUser: denyNotLoggedUser,
             changePassword: changePassword,
             getCurrentUser: getCurrentUser,
             getAllUsers: getAllUsers

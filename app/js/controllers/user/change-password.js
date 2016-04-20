@@ -6,7 +6,7 @@ app.controller('UserController.ChangePassword', [
     'notifyService',
     'userService',
     function ($scope, $location, notifyService, userService) {
-        userService.denyNotloggedUser();
+        userService.denyNotLoggedUser();
 
         $scope.changePassword = function (userData) {
             userService.changePassword(userData).then(function (result) {

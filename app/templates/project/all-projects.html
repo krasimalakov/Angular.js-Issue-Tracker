@@ -16,20 +16,19 @@
             <td>{{project.ProjectKey}}</td>
             <td><a href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
             <td>
-                <a ng-if="project.Lead.Id==userService.getCurrentUser().id" href="#/projects/{{project.Id}}/edit"
-                   class="text-center btn btn-sm btn-smalest btn-primary" ng-click="">Edit</a>
+                <a href="#/projects/{{project.Id}}/edit"
+                   class="text-center btn btn-sm btn-smalest btn-primary" ng-click="">Edit project</a>
             </td>
             <td>
-                <a ng-if="project.Lead.Id==userService.getCurrentUser().id" href="#/projects/{{project.Id}}/add-issue"
-                   class="text-center btn btn-sm  btn-smalest btn-warning" ng-click="">Add
-                    issue</a>
+                <a href="#/projects/{{project.Id}}/add-issue"
+                   class="text-center btn btn-sm  btn-smalest btn-warning" ng-click="">Add issue</a>
             </td>
         </tr>
         </tbody>
     </table>
     <a href="#/projects/add" ng-if="userService.isAdmin()" class="btn btn-primary ">Add New Project</a>
-    <div ng-if="pagination.maxSize>pagination.pageSize" pagination ng-model="pagination.startPage"
-         items-per-page="pagination.pageSize" total-items="pagination.maxSize"
+    <div ng-if="paginationProjects.maxSize>paginationProjects.pageSize" pagination ng-model="paginationProjects.startPage"
+         items-per-page="paginationProjects.pageSize" total-items="paginationProjects.maxSize"
          ng-change="selectProjectToView()" max-size="9" boundary-links="true"></div>
 </div>
 

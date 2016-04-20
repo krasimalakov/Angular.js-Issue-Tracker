@@ -10,7 +10,7 @@ app.controller('IssueController.AddIssue', [
     'projectService',
     'issueService',
     function ($scope, $location, $routeParams, notifyService, userService, labelService, projectService, issueService) {
-        userService.denyNotloggedUser();
+        userService.denyNotLoggedUser();
 
         userService.getAllUsers().then(function (users) {
             $scope.users = users;
@@ -37,7 +37,6 @@ app.controller('IssueController.AddIssue', [
             labels.forEach(function (label) {
                 issue.Labels.push({Name:label})
             });
-            issue.AssigneeId=issue.Assignee.Id;
             issueService.addIssue(issue).then(function (result) {
                 notifyService.showInfo('Issue is added successfully !');
                 $location.path('/');

@@ -10,7 +10,7 @@ app.controller('ProjectController.EditProject', [
     'labelService',
     'projectService',
     function ($scope, $location, $routeParams, $filter, notifyService, userService, labelService, projectService) {
-        userService.denyNotloggedUser();
+        userService.denyNotLoggedUser();
 
         userService.getAllUsers().then(function (users) {
             $scope.users = users;
@@ -24,7 +24,7 @@ app.controller('ProjectController.EditProject', [
             notifyService.showError('Get all labels request failed !', error);
         });
 
-        projectService.getProjects($routeParams.id).then(function (project) {
+        projectService.getProject($routeParams.id).then(function (project) {
             if ((userService.getCurrentUser().id != project.Lead.Id) && (!userService.isAdmin())) {
                 $location.path('/');
             }

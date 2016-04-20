@@ -9,9 +9,9 @@ app.controller('ProjectController.ViewProject', [
     'projectService',
     'issueService',
     function ($scope, $location, $routeParams, notifyService, userService, projectService, issueService) {
-        userService.denyNotloggedUser();
+        userService.denyNotLoggedUser();
 
-        projectService.getProjects($routeParams.id).then(function (project) {
+        projectService.getProject($routeParams.id).then(function (project) {
             $scope.project = project;
             issueService.getProjectIssues(project.Id).then(function (issues) {
                 $scope.allIssues = issues;

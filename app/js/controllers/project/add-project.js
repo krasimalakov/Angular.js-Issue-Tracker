@@ -8,7 +8,7 @@ app.controller('ProjectController.AddProject', [
     'labelService',
     'projectService',
     function ($scope, $location, notifyService, userService, labelService, projectService) {
-        userService.denyNotloggedUser();
+        userService.denyNotLoggedUser();
 
         userService.getAllUsers().then(function (users) {
             $scope.users = users;
@@ -39,13 +39,7 @@ app.controller('ProjectController.AddProject', [
             } else {
                 project.priorities = [];
             }
-            // if (project.LeadId == undefined) {
-            //     project.LeadId='';
-            // }
-            console.log(project);
             projectService.addProject(project).then(function (result) {
-                console.log(project);
-
                 notifyService.showInfo('Project is added successfully !');
                 $location.path('/');
             }, function (error) {

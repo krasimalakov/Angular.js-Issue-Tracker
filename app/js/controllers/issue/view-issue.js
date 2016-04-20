@@ -10,11 +10,11 @@ app.controller('IssueController.ViewIssue', [
     'projectService',
     'issueService',
     function ($scope, $location, $routeParams, notifyService, userService, labelService, projectService, issueService) {
-        userService.denyNotloggedUser();
+        userService.denyNotLoggedUser();
 
         var issueId = $routeParams.id;
         issueService.getIssue(issueId).then(function (issue) {
-            projectService.getProjects(issue.Project.Id).then(function (project) {
+            projectService.getProject(issue.Project.Id).then(function (project) {
                 issue.LeadId = project.Lead.Id;
                 $scope.issue = issue;
             }, function (error) {
