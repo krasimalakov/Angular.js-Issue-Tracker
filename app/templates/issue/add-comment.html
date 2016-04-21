@@ -1,0 +1,35 @@
+<div ng-if="issue!=undefined" class="panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Add comment</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-lg-2"></th>
+            <th class="col-lg-10"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><strong>Issue</strong></td>
+            <td>{{issue.Title}}</td>
+        </tr>
+        <tr>
+            <td>Project</td>
+            <td><a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{issue.Description}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="inputComment">Comment</label>
+                <textarea id="inputComment" class="form-control" placeholder="Comment ..."
+                          ng-model="comment" required="required" rows="10"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary center-block" ng-click="addComment(issue.Id, comment)" ng-disabled="comment==undefined">Save comment</button>
+</div>

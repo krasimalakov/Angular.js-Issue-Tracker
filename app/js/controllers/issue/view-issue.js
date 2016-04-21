@@ -15,13 +15,18 @@ app.controller('IssueController.ViewIssue', [
         var issueId = $routeParams.id;
         issueService.getIssue(issueId).then(function (issue) {
             projectService.getProject(issue.Project.Id).then(function (project) {
-                issue.LeadId = project.Lead.Id;
-                $scope.issue = issue;
+                issueService.getComments(issueId).then(function (comments) {
+                    issue.LeadId = project.Lead.Id;
+                    $scope.issue = issue;
+                    $scope.comments=comments;
+                }, function (error) {
+                    notifyService.showError('Get comments for issue id=' + issueId + ' is failed !', error);
+                });
             }, function (error) {
-                notifyService.showError('Get project id=' + issue.Project.Id + ' failed !', error);
+                notifyService.showError('Get project id=' + issue.Project.Id + ' is failed !', error);
             });
         }, function (error) {
-            notifyService.showError('Get issue id=' + issueId + ' failed !', error);
+            notifyService.showError('Get issue id=' + issueId + ' is failed !', error);
         });
 
         $scope.changeIssueStatus= function (statusId) {

@@ -55,7 +55,6 @@ app.factory('issueService', [
             }, function (error) {
                 deferred.reject(error.data);
             });
-
             return deferred.promise;
         }
 
@@ -66,7 +65,26 @@ app.factory('issueService', [
             }, function (error) {
                 deferred.reject(error.data);
             });
+            return deferred.promise;
+        }
 
+        function addComment(issueId, comment) {
+            var deferred = $q.defer();
+            $http.post(baseUrl + 'issues/' + issueId + '/comments', {Text: comment}).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
+            return deferred.promise;
+        }
+
+        function getComments(issueId) {
+            var deferred = $q.defer();
+            $http.get(baseUrl + 'issues/' + issueId + '/comments').then(function (response) {
+                deferred.resolve(response.data);
+            }, function (error) {
+                deferred.reject(error.data);
+            });
             return deferred.promise;
         }
 
@@ -76,6 +94,8 @@ app.factory('issueService', [
             getProjectIssues: getProjectIssues,
             addIssue: addIssue,
             updateIssue: updateIssue,
-            changeIssueStatus: changeIssueStatus
+            changeIssueStatus: changeIssueStatus,
+            getComments: getComments,
+            addComment: addComment
         }
     }]);

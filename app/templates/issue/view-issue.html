@@ -57,8 +57,38 @@
                 </button>
             </td>
         </tr>
+        <tr>
+            <td>Comments</td>
+            <td ng-if="comments.length>0">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="col-lg-4">Comment</th>
+                        <th class="col-lg-4">Author</th>
+                        <th class="col-lg-2">Created on</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="comment in comments">
+                        <td>{{comment.Text}}</td>
+                        <td>{{comment.Author.Username}}</td>
+                        <td>{{comment.CreatedOn|date:"dd.MM.yyyy"}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <div pagination ng-if="paginationIssue.maxSize>paginationIssue.pageSize"
+                     ng-model="paginationIssue.startPage" items-per-page="paginationIssue.pageSize"
+                     total-items="paginationIssue.maxSize" ng-change="selectIssuesToView()" max-size="9"
+                     boundary-links="true">
+                </div>
+        </tr>
         </tbody>
     </table>
-    <a href="#/issues/{{issue.Id}}/edit" ng-if="(issue.LeadId==userService.getCurrentUser().id)||(issue.Assignee.Id==userService.getCurrentUser().id)"
+    <a href="#/issues/{{issue.Id}}/add-comment"
+       ng-if="(issue.LeadId==userService.getCurrentUser().id)||(issue.Assignee.Id==userService.getCurrentUser().id)"
+       class="btn btn-warning">Add comment</a>
+    <a href="#/issues/{{issue.Id}}/edit"
+       ng-if="(issue.LeadId==userService.getCurrentUser().id)||(issue.Assignee.Id==userService.getCurrentUser().id)||(userService.isAdmin())"
        class="btn btn-primary">Edit Issue</a>
 </div>

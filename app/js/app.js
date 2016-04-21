@@ -51,6 +51,10 @@ var app = angular.module('IssueTracker', ['ngRoute', 'ui.bootstrap.pagination'])
             .when('/issues/:id/edit', {
                 templateUrl: 'templates/issue/edit-issue.html',
                 controller: 'IssueController.EditIssue'
+            })
+            .when('/issues/:id/add-comment', {
+                templateUrl: 'templates/issue/add-comment.html',
+                controller: 'IssueController.AddComment'
             });
 
         $routeProvider.otherwise({redirectTo: '/'});
