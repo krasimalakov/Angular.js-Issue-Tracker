@@ -3,10 +3,6 @@ body {
     margin: 0 auto;
 }
 
-.disabled-button {
-    opacity: 0.5;
-}
-
 input.ng-invalid:focus {
     border: 1px solid #ac2925;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(255, 92, 93, .6);
@@ -38,13 +34,17 @@ select.ng-invalid-required {
 ul.pagination {
     display: table;
     margin: 0 auto;
-    font-size: 11px;
+    font-size: 12px;
     padding: 2px;
 }
 
 .pagination > li > a,
 .pagination > li > span {
     padding: 0 5px;
+}
+
+.pagination > li.active > a {
+    background: linear-gradient(darkblue, lightblue);
 }
 
 .pagination {
@@ -146,10 +146,11 @@ table > tbody > tr.row-padding-2px > td {
 .show-comment:hover {
     height: auto;
     white-space: normal;
-    background-color: papayawhip;
-    border: 1px solid black;
+    /*background-color: papayawhip;*/
+    /*border: 1px solid black;*/
+    font-weight: 600;
     border-radius: 5px;
-    padding: 0 5px;
+    padding: 0;
     margin: 0;
 }
 
@@ -170,6 +171,10 @@ li > a.usernameTag {
     cursor: default;
 }
 
+.disabled-button {
+    opacity: 0.5;
+}
+
 .btn-primary, .btn-primary:hover {
     background: linear-gradient(darkblue, royalblue);
 }
@@ -180,4 +185,14 @@ li > a.usernameTag {
 
 .btn:hover {
     box-shadow: 0px 0px 5px black;
+}
+
+.nav > li,
+.dropdown-menu > li {
+    border: 1px solid #337AB7;
+    border-radius: 5px;
+}
+.dropdown-menu{
+    padding: 1px;
+    left: 15px;
 }
