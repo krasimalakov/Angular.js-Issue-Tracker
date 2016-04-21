@@ -22,7 +22,8 @@ app.controller('ProjectController.AddProject', [
             notifyService.showError('Get all labels request failed !', error);
         });
 
-        $scope.addProject = function (project) {
+        $scope.addProject = function (projectData) {
+            var project=JSON.parse(JSON.stringify(projectData));
             if (project.labels != undefined) {
                 var labels = project.labels.split(/\s*,\s*/);
                 project.labels = [];

@@ -35,7 +35,8 @@ app.controller('ProjectController.EditProject', [
             notifyService.showError('Get project Id=' + $routeParams.id + ' request failed !', error);
         });
 
-        $scope.updateProject = function (project) {
+        $scope.updateProject = function (projectData) {
+            var project=JSON.parse(JSON.stringify(projectData));
             if (project.Labels != undefined) {
                 var labels = project.Labels.trim().split(/\s*,\s*/);
                 project.Labels = [];

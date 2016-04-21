@@ -31,7 +31,8 @@ app.controller('IssueController.AddIssue', [
         });
         $scope.issue={};
         $scope.issue.ProjectId=$routeParams.id;
-        $scope.addIssue = function (issue) {
+        $scope.addIssue = function (issueData) {
+            var issue=JSON.parse(JSON.stringify(issueData));
             var labels = issue.Labels.trim().split(/\s*,\s*/);
             issue.Labels=[];
             labels.forEach(function (label) {

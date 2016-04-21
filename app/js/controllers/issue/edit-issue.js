@@ -47,19 +47,19 @@ app.controller('IssueController.EditIssue', [
             notifyService.showError('Get issue id=' + issueId + ' failed !', error);
         });
 
-        $scope.updateIssue = function (issue) {
-            var issueData = {};
-            issueData.Title = issue.Title;
-            issueData.Description = issue.Description;
-            issueData.DueDate = issue.DueDate;
-            issueData.AssigneeId = issue.AssigneeId;
-            issueData.PriorityId = issue.Priority.Id;
-            var labels = issue.Labels.trim().split(/\s*,\s*/);
-            issueData.Labels = [];
+        $scope.updateIssue = function (issueData) {
+            var issue = {};
+            issue.Title = issueData.Title;
+            issue.Description = issueData.Description;
+            issue.DueDate = issueData.DueDate;
+            issue.AssigneeId = issueData.AssigneeId;
+            issue.PriorityId = issueData.Priority.Id;
+            var labels = issueData.Labels.trim().split(/\s*,\s*/);
+            issue.Labels = [];
             labels.forEach(function (label) {
-                issueData.Labels.push({Name: label})
+                issue.Labels.push({Name: label})
             });
-            issueService.updateIssue(issueId, issueData).then(function (issue) {
+            issueService.updateIssue(issueId, issue).then(function (issue) {
                 notifyService.showInfo('Issue update is successfully !');
                 $location.path('/');
             }, function (error) {
