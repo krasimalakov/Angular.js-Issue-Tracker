@@ -58,7 +58,7 @@ app.controller('ProjectController.EditProject', [
                 notifyService.showInfo('Project update is successfully !');
                 $location.path('/');
             }, function (error) {
-                notifyService.showError('Update project Id=' + project.Id + ' failed !', error);
+                notifyService.showError('Update project Id=' + project.Id + ' is failed !', error);
             });
         }
     }]);
