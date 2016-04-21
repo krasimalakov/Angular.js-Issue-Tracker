@@ -29,11 +29,11 @@ app.controller('IssueController.EditIssue', [
         issueService.getIssue(issueId).then(function (issue) {
             projectService.getProject(issue.Project.Id).then(function (project) {
                 var currentUserId=userService.getCurrentUser().id;
-                if ((currentUserId!=project.Lead.Id)&&(currentUserId!=issue.Assignee.Id)){
+                if ((currentUserId!=project.Lead.Id)&&(currentUserId!=issue.Assignee.Id)&&(!userService.isAdmin())){
                     $location.path('/');
                 }
                 $scope.priorities = project.Priorities;
-                $scope.isProjectLeader= project.Lead.Id==currentUserId;
+                $scope.isEditPermission= ((project.Lead.Id==currentUserId)||(userService.isAdmin()));
                 issue.LeadId = project.Lead.Id;
                 issue.Labels = $filter('joinArrayProperty')(issue.Labels, 'Name');
                 issue.DueDate = new Date(issue.DueDate);

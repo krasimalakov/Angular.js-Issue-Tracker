@@ -48,8 +48,8 @@
                 <div class="col-lg-2 offset-0px">
                     <span>{{issue.Status.Name}}</span>
                 </div>
-                <div ng-if="((issue.Assignee.Id==userService.getCurrentUser().id)||(issue.LeadId==userService.getCurrentUser().id))&&
-                            (issue.AvailableStatuses.length>0)" class="col-lg-10">
+                <div ng-if="((issue.Assignee.Id==userService.getCurrentUser().id)||(issue.LeadId==userService.getCurrentUser().id)||
+                            (userService.isAdmin()))&&(issue.AvailableStatuses.length>0)" class="col-lg-10">
                     <div class="col-lg-3 offset-0px">
                         <strong>Set status to:</strong>
                     </div>

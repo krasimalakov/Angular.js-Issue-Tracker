@@ -6,13 +6,13 @@
         <div class="form-group">
             <label for="inputTitle">Title</label>
             <input id="inputTitle" type="text" class="form-control" ng-model="issue.Title" placeholder="Issue Title"
-                   required="required" ng-disabled="!isProjectLeader">
+                   required="required" ng-disabled="(!isEditPermission)">
         </div>
         <div class="form-group">
             <label for="inputAssignee">Assignee</label>
             <input ng-model="issue.Assignee.Username" type="text" set-user-id-from-username="issue.AssigneeId"
                    list="users" class="form-control" id="inputAssignee" placeholder="Assignee" required="required"
-                   ng-disabled="!isProjectLeader">
+                   ng-disabled="!isEditPermission">
             <datalist id="users">
                 <option ng-repeat="user in users | orderBy:'Username'" value="{{user.Username}}"></option>
             </datalist>
@@ -25,20 +25,20 @@
         </div>
         <div class="form-group">
             <label for="inputPriority">Priority</label>
-            <select ng-model="issue.Priority.Id" id="inputPriority" class="form-control" ng-disabled="!isProjectLeader"
+            <select ng-model="issue.Priority.Id" id="inputPriority" class="form-control" ng-disabled="!isEditPermission"
                     ng-options="priority.Id as priority.Name for priority in priorities" required="required">
             </select>
         </div>
         <div class="form-group">
             <label for="inputDueDate">Due Date</label>
             <input datepicker id="inputDueDate" type="date" class="form-control" placeholder="yyyy-mm-dd"
-                   ng-model="issue.DueDate" required="required" ng-disabled="!isProjectLeader">
+                   ng-model="issue.DueDate" required="required" ng-disabled="!isEditPermission">
         </div>
         <div class="form-group">
             <label for="inputLabels">Labels (comma separated)</label>
             <input ng-model="issue.Labels" input-label-suggest-list="labels" type="text" list="labelsList"
                    class="form-control" id="inputLabels" placeholder="Labels" required="required"
-                   ng-disabled="!isProjectLeader">
+                   ng-disabled="!isEditPermission">
             <datalist id="labelsList">
                 <option ng-repeat="label in labels" value="{{ label.Name}}"></option>
             </datalist>
@@ -46,7 +46,7 @@
         <div class="form-group">
             <label for="inputDescription">Description</label>
             <textarea id="inputDescription" class="form-control" placeholder="Description"
-                      ng-model="issue.Description" required="required" ng-disabled="!isProjectLeader"></textarea>
+                      ng-model="issue.Description" required="required" ng-disabled="!isEditPermission"></textarea>
         </div>
 
 
@@ -55,8 +55,8 @@
                 <strong>Status:</strong>
                 <span>{{issue.Status.Name}}</span>
             </div>
-            <div ng-if="((issue.Assignee.Id==userService.getCurrentUser().id)||(issue.LeadId==userService.getCurrentUser().id))&&
-                        (issue.AvailableStatuses.length>0)"
+            <div ng-if="((issue.Assignee.Id==userService.getCurrentUser().id)||(issue.LeadId==userService.getCurrentUser().id)||
+                        (userService.isAdmin()))&&(issue.AvailableStatuses.length>0)"
                  class="col-lg-9">
                 <div class="col-lg-3">
                     <strong>Set status to:</strong>
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <button ng-if="isProjectLeader" type="submit" class="btn btn-primary" ng-click="updateIssue(issue)"
+        <button ng-if="isEditPermission" type="submit" class="btn btn-primary" ng-click="updateIssue(issue)"
                 ng-disabled="editIssueForm.$invalid">
             Save changes
         </button>
