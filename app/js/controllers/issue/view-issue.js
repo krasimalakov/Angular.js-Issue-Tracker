@@ -18,7 +18,13 @@ app.controller('IssueController.ViewIssue', [
                 issueService.getComments(issueId).then(function (comments) {
                     issue.LeadId = project.Lead.Id;
                     $scope.issue = issue;
-                    $scope.comments=comments;
+                    $scope.allComments= comments;
+                    $scope.paginationComments = {
+                        'startPage': 1,
+                        'pageSize': 4,
+                        'maxSize': $scope.allComments.length
+                    };
+                    $scope.selectCommentsToView();
                 }, function (error) {
                     notifyService.showError('Get comments for issue id=' + issueId + ' is failed !', error);
                 });
@@ -28,6 +34,11 @@ app.controller('IssueController.ViewIssue', [
         }, function (error) {
             notifyService.showError('Get issue id=' + issueId + ' is failed !', error);
         });
+
+        $scope.selectCommentsToView = function () {
+            $scope.comments = $scope.allComments.slice(($scope.paginationComments.startPage - 1) * $scope.paginationComments.pageSize,
+                $scope.paginationComments.startPage * $scope.paginationComments.pageSize);
+        };
 
         $scope.changeIssueStatus= function (statusId) {
             issueService.changeIssueStatus(issueId, statusId).then(function (statuses) {

@@ -45,41 +45,51 @@
         <tr>
             <td>Status</td>
             <td>
-                {{issue.Status.Name}}
-            </td>
-        </tr>
-        <tr ng-if="(issue.Assignee.Id==userService.getCurrentUser().id)&&(issue.AvailableStatuses.length>0)">
-            <td>Set status to:</td>
-            <td>
-                <button ng-repeat="status in issue.AvailableStatuses"
-                        class="btn btn-sm btn-smalest btn-warning offset-10px" ng-click="changeIssueStatus(status.Id)">
-                    {{status.Name}}
-                </button>
+                <div class="col-lg-2 offset-0px">
+                    <span>{{issue.Status.Name}}</span>
+                </div>
+                <div ng-if="(issue.Assignee.Id==userService.getCurrentUser().id)&&(issue.AvailableStatuses.length>0)"
+                     class="col-lg-10">
+                    <div class="col-lg-3 offset-0px">
+                        <strong>Set status to:</strong>
+                    </div>
+                    <div class="col-lg-9">
+                        <button ng-repeat="status in issue.AvailableStatuses"
+                                class="btn btn-sm btn-smalest btn-warning offset-10px"
+                                ng-click="changeIssueStatus(status.Id)">
+                            {{status.Name}}
+                        </button>
+                    </div>
+                </div>
             </td>
         </tr>
         <tr>
-            <td>Comments</td>
-            <td ng-if="comments.length>0">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th class="col-lg-4">Comment</th>
-                        <th class="col-lg-4">Author</th>
-                        <th class="col-lg-2">Created on</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="comment in comments">
-                        <td>{{comment.Text}}</td>
-                        <td>{{comment.Author.Username}}</td>
-                        <td>{{comment.CreatedOn|date:"dd.MM.yyyy"}}</td>
-                    </tr>
+            <td ng-if="comments.length==0" colspan="2">No comments.</td>
+            <td ng-if="comments.length>0" colspan="2">
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="col-lg-4">Comment</th>
+                            <th class="col-lg-4">Author</th>
+                            <th class="col-lg-2">Created on</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="comment in comments" class="row-padding-2px">
+                            <td>
+                                <p class="show-content" comment="{{comment.Text}}">{{comment.Text}}</p>
+                            </td>
+                            <td>{{comment.Author.Username}}</td>
+                            <td>{{comment.CreatedOn|date:"dd.MM.yyyy"}}</td>
+                        </tr>
 
-                    </tbody>
-                </table>
-                <div pagination ng-if="paginationIssue.maxSize>paginationIssue.pageSize"
-                     ng-model="paginationIssue.startPage" items-per-page="paginationIssue.pageSize"
-                     total-items="paginationIssue.maxSize" ng-change="selectIssuesToView()" max-size="9"
+                        </tbody>
+                    </table>
+                </div>
+                <div pagination ng-if="paginationComments.maxSize>paginationComments.pageSize"
+                     ng-model="paginationComments.startPage" items-per-page="paginationComments.pageSize"
+                     total-items="paginationComments.maxSize" ng-change="selectCommentsToView()" max-size="9"
                      boundary-links="true">
                 </div>
         </tr>
