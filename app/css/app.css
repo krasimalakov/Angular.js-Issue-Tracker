@@ -69,7 +69,6 @@ ul.pagination {
 
 .dashboard-panel {
     border: 1px solid #337AB7;
-    /*border-top: none;*/
     width: 49.5%;
     height: 500px;
     margin: 5px 0 15px;
@@ -129,33 +128,23 @@ table>tbody>tr.row-padding-2px >td{
     padding: 0px 5px;
 }
 
-p.show-content{
+.show-comment {
     cursor: help;
     padding: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 650px;
+    width: 700px;
     height: 18px;
     margin: 0;
 }
 
-.show-content:hover::after{
-    content: attr(comment);
-    color: black;
+.show-comment:hover{
+    height: auto;
+    white-space: normal;
     background-color : papayawhip;
     border: 1px solid black;
     border-radius: 5px;
-    padding: 5px;
+    padding: 0 5px;
     margin: 0;
-    font-size: 12px;
-    text-align: justify;
-    display: flex;
-    align-items: center;
-    white-space: normal;
-    position: absolute;
-    top: 60%;
-    left: 10%;
-    width: 85%;
-    min-height: 43px;
 }
