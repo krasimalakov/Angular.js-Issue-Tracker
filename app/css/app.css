@@ -161,7 +161,6 @@ li > a.usernameTag {
     text-align: center;
     color: white;
     background: linear-gradient(darkblue, lightblue);
-    border: 1px solid #337AB7;
     border-radius: 5px;
     padding: 22px 15px;
     font-weight: 600;
@@ -171,8 +170,8 @@ li > a.usernameTag {
     cursor: default;
 }
 
-.disabled-button {
-    opacity: 0.5;
+.btn:disabled {
+    opacity: 0.4;
 }
 
 .btn-primary, .btn-primary:hover {
@@ -195,4 +194,13 @@ li > a.usernameTag {
 .dropdown-menu{
     padding: 1px;
     left: 15px;
+}
+
+.checkbox{
+    margin-top: 0;
+}
+
+.checkbox input[type="checkbox"] {
+    margin-left: 4px;
+    position: absolute;
 }

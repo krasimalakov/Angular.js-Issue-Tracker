@@ -36,41 +36,55 @@
         </tr>
         <tr>
             <td ng-if="issues.length==0" colspan="2">No issues.</td>
-            <td ng-if="issues.length>0"  colspan="2">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th class="col-lg-4">Issue</th>
-                        <th class="col-lg-4">Assignee</th>
-                        <th class="col-lg-2">Due Date</th>
-                        <th class="col-lg-1">Priority</th>
-                        <th class="col-lg-1">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="issue in issues">
-                        <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
-                        <td>{{issue.Assignee.Username}}</td>
-                        <td>{{issue.DueDate|date:"dd.MM.yyyy"}}</td>
-                        <td>{{issue.Priority.Name}}</td>
-                        <td>{{issue.Status.Name}}</td>
-                    </tr>
+            <td ng-if="issues.length>0" colspan="2">
+                <div  style="height: 185px">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="col-lg-4">Issue</th>
+                            <th class="col-lg-4">Assignee</th>
+                            <th class="col-lg-2">Due Date</th>
+                            <th class="col-lg-1">Priority</th>
+                            <th class="col-lg-1">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="issue in issues">
+                            <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                            <td>{{issue.Assignee.Username}}</td>
+                            <td>{{issue.DueDate|date:"dd.MM.yyyy"}}</td>
+                            <td>{{issue.Priority.Name}}</td>
+                            <td>{{issue.Status.Name}}</td>
+                        </tr>
 
-                    </tbody>
-                </table>
-                <div pagination ng-if="paginationIssue.maxSize>paginationIssue.pageSize"
-                     ng-model="paginationIssue.startPage" items-per-page="paginationIssue.pageSize"
-                     total-items="paginationIssue.maxSize" ng-change="selectIssuesToView()" max-size="9"
-                     boundary-links="true">
+                        </tbody>
+                    </table>
                 </div>
-
+                <div class="col-lg-12 row-offset-15px">
+                    <div class="col-lg-2">
+                        <button ng-if="!showAllIssue" ng-click="selectAllIssuesToView()"
+                                class="btn btn-primary btn-smalest">Show all issues
+                        </button>
+                        <button ng-if="showAllIssue" ng-click="selectMyIssuesToView()" class="btn btn-info btn-smalest">
+                            Show my issues
+                        </button>
+                    </div>
+                    <div class=" col-lg-offset-1 ">
+                        <div pagination ng-if="paginationIssue.maxSize>paginationIssue.pageSize"
+                             ng-model="paginationIssue.startPage" items-per-page="paginationIssue.pageSize"
+                             total-items="paginationIssue.maxSize" ng-change="selectIssuesToView()" max-size="9"
+                             boundary-links="true">
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
         </tbody>
     </table>
-    <a ng-if="(project.Lead.Id==userService.getCurrentUser().id)||userService.isAdmin()" href="#/projects/{{project.Id}}/add-issue"
-       class="btn btn-warning" ng-click="">Add issue</a>
+    <a href="#/projects/{{project.Id}}/add-issue"
+       ng-if="(project.Lead.Id==userService.getCurrentUser().id)||userService.isAdmin()" class="btn btn-warning">
+        Add issue</a>
     <a href="#/projects/{{project.Id}}/edit"
-       ng-if="userService.isAdmin()||userService.getCurrentUser().id==project.Lead.Id" class="btn btn-primary">
+       ng-if="(userService.isAdmin())||(userService.getCurrentUser().id==project.Lead.Id)" class="btn btn-primary">
         Edit Project</a>
 </div>
