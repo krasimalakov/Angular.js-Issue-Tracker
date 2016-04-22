@@ -24,11 +24,8 @@
         </div>
         <div class="form-group">
             <label for="inputProject">Project</label>
-            <select id="inputProject" class="form-control" ng-model="issue.ProjectId" required="required">
-                <option ng-repeat="project in projects | orderBy:'Name'" ng-selected="issue.ProjectId==project.Id"
-                        value="{{project.Id}}">{{project.Name}}
-                </option>
-            </select>
+            <input ng-model="issue.Project.Name" id="inputProject" type="text" class="form-control" required="required"
+                   disabled>
         </div>
         <div class="form-group">
             <label for="inputPriority">Priority</label>

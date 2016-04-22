@@ -8,7 +8,9 @@ app.controller('ProjectController.AddProject', [
     'labelService',
     'projectService',
     function ($scope, $location, notifyService, userService, labelService, projectService) {
-        userService.denyNotLoggedUser();
+        if (!userService.isAdmin()){
+            $location.path('/');
+        }
 
         userService.getAllUsers().then(function (users) {
             $scope.users = users;

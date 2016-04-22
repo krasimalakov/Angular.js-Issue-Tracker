@@ -23,14 +23,20 @@ app.controller('IssueController.AddIssue', [
         }, function (error) {
             notifyService.showError('Get all labels request failed !', error);
         });
+        var projectId=$routeParams.id;
 
-        projectService.getProjects().then(function (projects) {
-            $scope.projects = projects;
+        projectService.getProject(projectId).then(function (project) {
+            if ((userService.getCurrentUser().id != project.Lead.Id) && (!userService.isAdmin())) {
+                $location.path('/');
+            }
+            $scope.issue={};
+            $scope.issue.ProjectId=projectId;
+            $scope.issue.Project=project;
+
         }, function (error) {
-            notifyService.showError('Get all projects request failed !', error);
+            notifyService.showError('Get project id='+projectId+' failed !', error);
         });
-        $scope.issue={};
-        $scope.issue.ProjectId=$routeParams.id;
+
         $scope.addIssue = function (issueData) {
             var issue=JSON.parse(JSON.stringify(issueData));
             var date=issueData.DueDate;
