@@ -42,7 +42,10 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th class="col-lg-4">Issue</th>
+                                <th class="col-lg-4">
+                                    <input ng-model="search.issue" type="text" placeholder="Issue title search ..."
+                                           ng-change="applyFilters()" class="searchInIssue"/>
+                                </th>
                                 <th class="col-lg-4">
                                     <select ng-model="search.assignee" ng-change="applyFilters()"
                                             ng-options="assignee as assignee.Username for assignee in assignees|orderBy:'Username' track by assignee.Id">

@@ -12,6 +12,9 @@ input.ng-valid {
     border: 1px solid #e5e5e5;
 }
 
+input.searchInIssue{
+    border: 1px solid #000000;
+}
 input.ng-invalid-required,
 input.non-valid-user,
 textarea.ng-invalid-required,
