@@ -12,9 +12,18 @@ input.ng-valid {
     border: 1px solid #e5e5e5;
 }
 
-input.searchInIssue{
-    border: 1px solid #000000;
+input.searchInIssue,
+select.searchInIssue {
+    padding: 3px 5px;
+    box-shadow: 0px -1px 1px #000, inset 0px -1px 1px #000;
+    border-radius: 3px;
+    border: none;
 }
+
+select.searchInIssue {
+    padding: 4px 5px;
+}
+
 input.ng-invalid-required,
 input.non-valid-user,
 textarea.ng-invalid-required,
@@ -177,9 +186,6 @@ li > a.usernameTag {
     cursor: default;
 }
 
-.btn{
-    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
-}
 .btn:disabled {
     opacity: 0.4;
 }
@@ -190,10 +196,12 @@ li > a.usernameTag {
 
 .btn-primary, .btn-primary:hover {
     background: linear-gradient(darkblue, royalblue);
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
 .btn-warning, .btn-warning:hover {
     background: linear-gradient(#c77405, #efe45c);
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
 .dropdown-menu {

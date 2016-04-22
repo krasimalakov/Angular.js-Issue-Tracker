@@ -47,22 +47,22 @@
                                            ng-change="applyFilters()" class="searchInIssue"/>
                                 </th>
                                 <th class="col-lg-4">
-                                    <select ng-model="search.assignee" ng-change="applyFilters()"
+                                    <select ng-model="search.assignee" ng-change="applyFilters()" class="searchInIssue"
                                             ng-options="assignee as assignee.Username for assignee in assignees|orderBy:'Username' track by assignee.Id">
                                     </select>
                                 </th>
                                 <th class="col-lg-2">
-                                    <select ng-model="search.dueDate" ng-change="applyFilters()"
+                                    <select ng-model="search.dueDate" ng-change="applyFilters()" class="searchInIssue"
                                             ng-options="dueDate as dueDate.Name for dueDate in dueDates track by dueDate.Id">
                                     </select>
                                 </th>
                                 <th class="col-lg-1">
-                                    <select ng-model="search.priority" ng-change="applyFilters()"
+                                    <select ng-model="search.priority" ng-change="applyFilters()" class="searchInIssue"
                                             ng-options="priority as priority.Name for priority in priorities|orderBy:'Name' track by priority.Id">
                                     </select>
                                 </th>
                                 <th class="col-lg-1">
-                                    <select ng-model="search.status" ng-change="applyFilters()"
+                                    <select ng-model="search.status" ng-change="applyFilters()"  class="searchInIssue"
                                             ng-options="status as status.Name for status in statuses|orderBy:'Name' track by status.Id">
                                     </select>
                                 </th>
@@ -105,10 +105,12 @@
         </tr>
         </tbody>
     </table>
+    <div class="col-lg-12 col-lg-offset-5">
     <a href="#/projects/{{project.Id}}/add-issue"
        ng-if="(project.Lead.Id==userService.getCurrentUser().id)||userService.isAdmin()" class="btn btn-warning">
         Add issue</a>
     <a href="#/projects/{{project.Id}}/edit"
        ng-if="(userService.isAdmin())||(userService.getCurrentUser().id==project.Lead.Id)" class="btn btn-primary">
         Edit Project</a>
+    </div>
 </div>
