@@ -102,6 +102,19 @@ app.controller('ProjectController.ViewProject', [
                 });
             }
 
+            // filter by Due Date
+            issues = issuesToView;
+            issuesToView = [];
+            if ($scope.search.dueDate.Id == defaultSearch) {
+                issuesToView = issues;
+            } else {
+                issues.forEach(function (issue) {
+                    if (getMillisecondsFromDate(issue.DueDate) == $scope.search.dueDate.Id) {
+                        issuesToView.push(issue);
+                    }
+                });
+            }
+
             // finish - apply
             updateSearchData();
             $scope.paginationIssue.startPage = 1;
@@ -129,8 +142,7 @@ app.controller('ProjectController.ViewProject', [
                 addItemToCollection(issue.Assignee, $scope.assignees);
                 addItemToCollection(issue.Priority, $scope.priorities);
                 addItemToCollection(issue.Status, $scope.statuses);
-                var date=$filter('date')(issue.DueDate,"dd.MM.yyyy");
-                addItemToCollection({Id: issue.DueDate, Name: date}, $scope.dueDates);
+                addItemToCollection(createFilterDateObj(issue.DueDate), $scope.dueDates);
             });
             sortDueDateCollection();
         }
@@ -144,8 +156,7 @@ app.controller('ProjectController.ViewProject', [
                 addItemToCollection(issue.Assignee, $scope.assignees);
                 addItemToCollection(issue.Priority, $scope.priorities);
                 addItemToCollection(issue.Status, $scope.statuses);
-                var date=$filter('date')(issue.DueDate,"dd.MM.yyyy");
-                addItemToCollection({Id: issue.DueDate, Name: date}, $scope.dueDates);
+                addItemToCollection(createFilterDateObj(issue.DueDate), $scope.dueDates);
             });
             sortDueDateCollection();
         }
@@ -163,16 +174,29 @@ app.controller('ProjectController.ViewProject', [
         }
 
         function sortDueDateCollection() {
-            var dateDeafult=$scope.dueDates[0];
+            var dateDeafult = $scope.dueDates[0];
 
-            var dueDates=$scope.dueDates.slice(1,$scope.dueDates.length).sort(function (a, b) {
-                return Date.parse(a.Id)<Date.parse(b.Id);
+            var dueDates = $scope.dueDates.slice(1, $scope.dueDates.length).sort(function (a, b) {
+                return a.Id < b.Id;
             });
 
-            $scope.dueDates=[dateDeafult];
+            $scope.dueDates = [dateDeafult];
             dueDates.forEach(function (dateObj) {
                 $scope.dueDates.push(dateObj);
             });
+        }
+
+        function createFilterDateObj(date) {
+            var dateText = $filter('date')(date, "dd.MM.yyyy");
+            var onlyDate = getMillisecondsFromDate(date);
+            return {
+                Id: onlyDate,
+                Name: dateText
+            };
+        }
+
+        function getMillisecondsFromDate(date) {
+            return Date.parse($filter('date')(date, "yyyy-MM-dd"));
         }
 
     }]);

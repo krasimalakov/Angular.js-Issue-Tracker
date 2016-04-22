@@ -61,7 +61,6 @@ app.controller('IssueController.EditIssue', [
             labels.forEach(function (label) {
                 issue.Labels.push({Name: label})
             });
-            console.log(issue.DueDate);
             issueService.updateIssue(issueId, issue).then(function (issue) {
                 notifyService.showInfo('Issue update is successfully !');
                 $location.path('/');
