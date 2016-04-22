@@ -3,8 +3,8 @@ app.controller('HomeController', [
     function ($scope) {
         $scope.toRegister= function () {
             $scope.showRegisterPage=true;
-        }
+        };
         $scope.toLogin= function () {
             $scope.showRegisterPage=false;
-        }
+        };
     }]);

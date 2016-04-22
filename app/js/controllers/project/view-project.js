@@ -118,13 +118,11 @@ app.controller('ProjectController.ViewProject', [
             // filter by Search in Title
             issues = issuesToView;
             issuesToView = [];
-            console.log($scope.search.issue);
             if (($scope.search.issue === undefined)||($scope.search.issue.trim() == '')) {
                 issuesToView = issues;
             } else {
                 issues.forEach(function (issue) {
                     if (issue.Title.toLowerCase().indexOf($scope.search.issue.toLowerCase())>=0) {
-                        console.log('*');
                         issuesToView.push(issue);
                     }
                 });
