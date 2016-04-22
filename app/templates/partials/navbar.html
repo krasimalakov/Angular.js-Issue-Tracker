@@ -1,15 +1,15 @@
 <ul class="nav nav-pills nav-stacked">
-    <li ><a class="usernameTag">{{userService.getCurrentUser().username}}</a></li>
+    <li><a class="usernameTag">{{userService.getCurrentUser().username}}</a></li>
     <li class=""><a href="#/">Dashboard</a></li>
-    <li><a href="#/projects" ng-if="userService.isAdmin()">List All Projects</a></li>
-    <li><a href="#/projects/add" ng-if="userService.isAdmin()">Add New Project</a></li>
+    <li ng-if="userService.isAdmin()"><a href="#/projects">List All Projects</a></li>
+    <li ng-if="userService.isAdmin()"><a href="#/projects/add">Add New Project</a></li>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="">
             User Profile <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
             <li><a href="#/profile/password">Change password</a></li>
-            <li><a href="#/profile/set-admin">Set admin permission</a></li>
+            <li ng-if="userService.isAdmin()"><a href="#/profile/set-admin">Set admin permission</a></li>
         </ul>
     </li>
     <li><a href="#/logout">Logout</a></li>

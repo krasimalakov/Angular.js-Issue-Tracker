@@ -37,15 +37,21 @@
         <tr>
             <td ng-if="issues.length==0" colspan="2">No issues.</td>
             <td ng-if="issues.length>0" colspan="2">
-                <div  style="height: 185px">
+                <div style="height: 185px">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th class="col-lg-4">Issue</th>
-                            <th class="col-lg-4">Assignee</th>
-                            <th class="col-lg-2">Due Date</th>
-                            <th class="col-lg-1">Priority</th>
-                            <th class="col-lg-1">Status</th>
+                            <form>
+                                <th class="col-lg-4">Issue</th>
+                                <th class="col-lg-4">
+                                    <select ng-model="search.assignee" ng-change="applyFilters()"
+                                            ng-options="assignee as assignee.Username for assignee in assignees|orderBy:'Username' track by assignee.Id">
+                                    </select>
+                                </th>
+                                <th class="col-lg-2">Due Date</th>
+                                <th class="col-lg-1">Priority</th>
+                                <th class="col-lg-1">Status</th>
+                            </form>
                         </tr>
                         </thead>
                         <tbody>

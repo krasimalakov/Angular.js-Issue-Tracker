@@ -12,10 +12,6 @@ var app = angular.module('IssueTracker', ['ngRoute', 'ui.bootstrap.pagination'])
                 templateUrl: 'templates/user/logout.html',
                 controller: 'UserController.Logout'
             })
-            .when('/profile', {
-                templateUrl: 'templates/user/edit-profile.html',
-                controller: 'UserController.EditProfile'
-            })
             .when('/profile/password', {
                 templateUrl: 'templates/user/change-password.html',
                 controller: 'UserController.ChangePassword'
