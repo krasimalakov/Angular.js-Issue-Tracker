@@ -22,7 +22,6 @@ app.factory('userService', [
         function register(userData) {
             var deferred = $q.defer();
             $http.post(baseUrl + 'api/Account/Register', userData).then(function (response) {
-                initUserData(response.data);
                 deferred.resolve(response.data);
             }, function (error) {
                 deferred.reject(error.data);
