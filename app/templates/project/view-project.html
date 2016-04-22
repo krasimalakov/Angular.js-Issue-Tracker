@@ -56,7 +56,11 @@
                                             ng-options="priority as priority.Name for priority in priorities|orderBy:'Name' track by priority.Id">
                                     </select>
                                 </th>
-                                <th class="col-lg-1">Status</th>
+                                <th class="col-lg-1">
+                                    <select ng-model="search.status" ng-change="applyFilters()"
+                                            ng-options="status as status.Name for status in statuses|orderBy:'Name' track by status.Id">
+                                    </select>
+                                </th>
                             </form>
                         </tr>
                         </thead>
@@ -73,12 +77,15 @@
                     </table>
                 </div>
                 <div class="col-lg-12 row-offset-15px">
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <button ng-if="!showAllIssue" ng-click="selectAllIssuesToView()"
                                 class="btn btn-primary btn-smalest">Show all issues
                         </button>
                         <button ng-if="showAllIssue" ng-click="selectMyIssuesToView()" class="btn btn-info btn-smalest">
                             Show my issues
+                        </button>
+                        <button ng-click="clearFilters()" class="btn btn-warning btn-smalest">
+                            Clear filters
                         </button>
                     </div>
                     <div class=" col-lg-offset-1 ">

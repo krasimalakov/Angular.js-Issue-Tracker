@@ -63,59 +63,96 @@ app.controller('ProjectController.ViewProject', [
         $scope.applyFilters = function (search) {
             var issues = ($scope.showAllIssue ? allIssues : myIssues);
             issuesToView = [];
+
             // filter by Assignee
             if ($scope.search.assignee.Id == defaultSearch) {
                 issuesToView = issues;
             } else {
                 issues.forEach(function (issue) {
-                    if (issue.Assignee.Id==$scope.search.assignee.Id) {
+                    if (issue.Assignee.Id == $scope.search.assignee.Id) {
                         issuesToView.push(issue);
                     }
                 });
             }
+
             // filter by Priority
-            issues=issuesToView;
-            issuesToView=[];
-            console.log($scope.search.priority.Id);
+            issues = issuesToView;
+            issuesToView = [];
             if ($scope.search.priority.Id == defaultSearch) {
                 issuesToView = issues;
             } else {
                 issues.forEach(function (issue) {
-                    if (issue.Priority.Id==$scope.search.priority.Id) {
+                    if (issue.Priority.Id == $scope.search.priority.Id) {
+                        issuesToView.push(issue);
+                    }
+                });
+            }
+
+            // filter by Priority
+            issues = issuesToView;
+            issuesToView = [];
+            if ($scope.search.status.Id == defaultSearch) {
+                issuesToView = issues;
+            } else {
+                issues.forEach(function (issue) {
+                    if (issue.Status.Id == $scope.search.status.Id) {
                         issuesToView.push(issue);
                     }
                 });
             }
 
             // finish - apply
+            updateSearchData();
             $scope.paginationIssue.startPage = 1;
             $scope.paginationIssue.maxSize = issuesToView.length;
             $scope.selectIssuesToView();
         };
 
+        $scope.clearFilters = function () {
+            issuesToView = ($scope.showAllIssue ? allIssues : myIssues);
+            initSearchData();
+            $scope.selectIssuesToView();
+        };
+
         function initSearchData() {
-            $scope.search={};
-            $scope.search.assignee={Id: defaultSearch, Username: '- Assignee -'};
+            $scope.search = {};
+            $scope.search.assignee = {Id: defaultSearch, Username: '- Assignee -'};
             $scope.assignees = [$scope.search.assignee];
-            $scope.search.priority ={Id: defaultSearch, Name: '- Priority -'};
+            $scope.search.priority = {Id: defaultSearch, Name: '- Priority -'};
             $scope.priorities = [$scope.search.priority];
-            $scope.statuses = [];
+            $scope.search.status = {Id: defaultSearch, Name: '- Status -'};
+            $scope.statuses = [$scope.search.status];
             $scope.dueDates = [];
             issuesToView.forEach(function (issue) {
                 addItemToCollection(issue.Assignee, $scope.assignees);
                 addItemToCollection(issue.Priority, $scope.priorities);
+                addItemToCollection(issue.Status, $scope.statuses);
             });
 
-            function addItemToCollection(newItem, items) {
-                var isItemExist = false;
-                items.forEach(function (item) {
-                    if (JSON.stringify(item) == JSON.stringify(newItem)) {
-                        isItemExist = true;
-                    }
-                });
-                if (!isItemExist) {
-                    items.push(newItem);
+        }
+
+        function updateSearchData() {
+            $scope.assignees = [$scope.assignees[0]];
+            $scope.priorities = [$scope.priorities[0]];
+            $scope.statuses = [$scope.statuses[0]];
+            $scope.dueDates = [];
+            issuesToView.forEach(function (issue) {
+                addItemToCollection(issue.Assignee, $scope.assignees);
+                addItemToCollection(issue.Priority, $scope.priorities);
+                addItemToCollection(issue.Status, $scope.statuses);
+            });
+        }
+
+        function addItemToCollection(newItem, items) {
+            var isItemExist = false;
+            items.forEach(function (item) {
+                if (JSON.stringify(item) == JSON.stringify(newItem)) {
+                    isItemExist = true;
                 }
+            });
+            if (!isItemExist) {
+                items.push(newItem);
             }
         }
+
     }]);

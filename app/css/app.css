@@ -174,8 +174,15 @@ li > a.usernameTag {
     cursor: default;
 }
 
+.btn{
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+}
 .btn:disabled {
     opacity: 0.4;
+}
+
+.btn:hover {
+    box-shadow: 0px 0px 5px black;
 }
 
 .btn-primary, .btn-primary:hover {
@@ -184,10 +191,6 @@ li > a.usernameTag {
 
 .btn-warning, .btn-warning:hover {
     background: linear-gradient(#c77405, #efe45c);
-}
-
-.btn:hover {
-    box-shadow: 0px 0px 5px black;
 }
 
 .dropdown-menu {
@@ -200,9 +203,11 @@ li > a.usernameTag {
     border: 1px solid #337AB7;
     border-radius: 5px;
 }
-.dropdown-menu > li >a{
+
+.dropdown-menu > li > a {
     color: #337AB7;
 }
+
 .nav > li > a:hover,
 .nav > li > a:focus,
 .dropdown-menu > li > a:hover {
