@@ -62,7 +62,7 @@ app.controller('IssueController.EditIssue', [
                 issue.Labels.push({Name: label})
             });
             issueService.updateIssue(issueId, issue).then(function (issue) {
-                notifyService.showInfo('Issue update is successfully !');
+                notifyService.showInfo('Issue update successfully !');
                 $location.path('/');
             }, function (error) {
                 notifyService.showError('Update issue id=' + issueId + ' failed !', error);
@@ -78,7 +78,7 @@ app.controller('IssueController.EditIssue', [
                     }
                 });
                 $scope.issue.AvailableStatuses=statuses;
-                notifyService.showInfo('Change issue status is successful !');
+                notifyService.showInfo('Change issue status successful !');
             }, function (error) {
                 notifyService.showError('Change issue id=' + issueId + 'status failed !', error);
             });

@@ -13,7 +13,7 @@ app.controller('UserController.Login', [
 
         $scope.login = function (user) {
             userService.login(user).then(function (result) {
-                notifyService.showInfo('User login is successfully !');
+                notifyService.showInfo('User login successfully !');
                 $location.path('/');
             }, function (error) {
                 notifyService.showError('User login failed !', error);

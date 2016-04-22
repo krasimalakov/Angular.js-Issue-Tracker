@@ -29,10 +29,10 @@ app.controller('IssueController.AddComment', [
         
         $scope.addComment= function (comment) {
             issueService.addComment(issueId, comment).then(function (comments) {
-                notifyService.showInfo('Adding comment to issue id='+issueId+' is successfully !');
+                notifyService.showInfo('Adding comment to issue id='+issueId+' successfully !');
                 $location.path('/issues/'+issueId);
             }, function (error) {
-                notifyService.showError('Adding comment to issue id='+issueId+' is failed !', error);
+                notifyService.showError('Adding comment to issue id='+issueId+' failed !', error);
             });
         }
 

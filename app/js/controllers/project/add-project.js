@@ -41,7 +41,7 @@ app.controller('ProjectController.AddProject', [
                 project.priorities = [];
             }
             projectService.addProject(project).then(function (result) {
-                notifyService.showInfo('Project is added successfully !');
+                notifyService.showInfo('Project added successfully !');
                 $location.path('/');
             }, function (error) {
                 notifyService.showError('Add project failed !', error);

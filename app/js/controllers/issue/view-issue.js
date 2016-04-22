@@ -26,13 +26,13 @@ app.controller('IssueController.ViewIssue', [
                     };
                     $scope.selectCommentsToView();
                 }, function (error) {
-                    notifyService.showError('Get comments for issue id=' + issueId + ' is failed !', error);
+                    notifyService.showError('Get comments for issue id=' + issueId + ' failed !', error);
                 });
             }, function (error) {
-                notifyService.showError('Get project id=' + issue.Project.Id + ' is failed !', error);
+                notifyService.showError('Get project id=' + issue.Project.Id + ' failed !', error);
             });
         }, function (error) {
-            notifyService.showError('Get issue id=' + issueId + ' is failed !', error);
+            notifyService.showError('Get issue id=' + issueId + ' failed !', error);
         });
 
         $scope.selectCommentsToView = function () {
@@ -49,7 +49,7 @@ app.controller('IssueController.ViewIssue', [
                     }
                 });
                 $scope.issue.AvailableStatuses=statuses;
-                notifyService.showInfo('Change issue status is successful !');
+                notifyService.showInfo('Change issue status successful !');
             }, function (error) {
                 notifyService.showError('Change issue id=' + issueId + 'status failed !', error);
             });

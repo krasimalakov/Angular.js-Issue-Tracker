@@ -16,7 +16,7 @@ app.controller('UserController.SetAdminPermission', [
         
         $scope.setAdminPermission = function (userId) {
             userService.setAdminPermission(userId).then(function (result) {
-                notifyService.showInfo('User set admin permission is successfully !');
+                notifyService.showInfo('User set admin permission successfully !');
                 $location.path('/');
             }, function (error) {
                 notifyService.showError('User set admin permission failed !', error);

@@ -9,7 +9,7 @@ app.controller('UserController.Logout', [
         userService.denyNotLoggedUser();
 
         userService.logout().then(function (result) {
-            notifyService.showInfo('User logout is successfully !');
+            notifyService.showInfo('User logout successfully !');
             $location.path('/');
         }, function (error) {
             notifyService.showError('User logout failed !', error);

@@ -55,10 +55,10 @@ app.controller('ProjectController.EditProject', [
             }
             project.LeadId = project.Lead.Id;
             projectService.updateProject(project).then(function (project) {
-                notifyService.showInfo('Project update is successfully !');
+                notifyService.showInfo('Project update successfully !');
                 $location.path('/');
             }, function (error) {
-                notifyService.showError('Update project Id=' + project.Id + ' is failed !', error);
+                notifyService.showError('Update project Id=' + project.Id + ' failed !', error);
             });
         }
     }]);

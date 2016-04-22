@@ -42,7 +42,7 @@ app.controller('IssueController.AddIssue', [
                 issue.Labels.push({Name:label})
             });
             issueService.addIssue(issue).then(function (result) {
-                notifyService.showInfo('Issue is added successfully !');
+                notifyService.showInfo('Issue added successfully !');
                 $location.path('/');
             }, function (error) {
                 notifyService.showError('Add issue failed !', error);
