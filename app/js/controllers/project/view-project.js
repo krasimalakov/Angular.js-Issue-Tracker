@@ -73,6 +73,19 @@ app.controller('ProjectController.ViewProject', [
                     }
                 });
             }
+            // filter by Priority
+            issues=issuesToView;
+            issuesToView=[];
+            console.log($scope.search.priority.Id);
+            if ($scope.search.priority.Id == defaultSearch) {
+                issuesToView = issues;
+            } else {
+                issues.forEach(function (issue) {
+                    if (issue.Priority.Id==$scope.search.priority.Id) {
+                        issuesToView.push(issue);
+                    }
+                });
+            }
 
             // finish - apply
             $scope.paginationIssue.startPage = 1;
@@ -84,11 +97,13 @@ app.controller('ProjectController.ViewProject', [
             $scope.search={};
             $scope.search.assignee={Id: defaultSearch, Username: '- Assignee -'};
             $scope.assignees = [$scope.search.assignee];
-            $scope.priorities = [];
+            $scope.search.priority ={Id: defaultSearch, Name: '- Priority -'};
+            $scope.priorities = [$scope.search.priority];
             $scope.statuses = [];
             $scope.dueDates = [];
             issuesToView.forEach(function (issue) {
-                addItemToCollection(issue.Assignee, $scope.assignees)
+                addItemToCollection(issue.Assignee, $scope.assignees);
+                addItemToCollection(issue.Priority, $scope.priorities);
             });
 
             function addItemToCollection(newItem, items) {

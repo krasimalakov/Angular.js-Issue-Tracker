@@ -35,8 +35,8 @@
             <td>{{project.Description}}</td>
         </tr>
         <tr>
-            <td ng-if="issues.length==0" colspan="2">No issues.</td>
-            <td ng-if="issues.length>0" colspan="2">
+            <!--<td ng-if="issues.length==0" colspan="2">No issues.</td>-->
+            <td colspan="2">
                 <div style="height: 185px">
                     <table class="table table-striped">
                         <thead>
@@ -48,8 +48,14 @@
                                             ng-options="assignee as assignee.Username for assignee in assignees|orderBy:'Username' track by assignee.Id">
                                     </select>
                                 </th>
-                                <th class="col-lg-2">Due Date</th>
-                                <th class="col-lg-1">Priority</th>
+                                <th class="col-lg-2">
+                                    Due Date
+                                </th>
+                                <th class="col-lg-1">
+                                    <select ng-model="search.priority" ng-change="applyFilters()"
+                                            ng-options="priority as priority.Name for priority in priorities|orderBy:'Name' track by priority.Id">
+                                    </select>
+                                </th>
                                 <th class="col-lg-1">Status</th>
                             </form>
                         </tr>
