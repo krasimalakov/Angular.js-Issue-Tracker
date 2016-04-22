@@ -12,7 +12,15 @@ app.controller('UserController.Register', [
             user.gender = user.gender || 0;
             userService.register(user).then(function (result) {
                 notifyService.showInfo('User registration successfully !');
-                $scope.toLogin();
+                user.username = user.email;
+                delete user.email;
+                userService.login(user).then(function (result) {
+                    notifyService.showInfo('User login successfully !');
+                    $location.path('/');
+                }, function (error) {
+                    notifyService.showError('User login failed !', error);
+                });
+
             }, function (error) {
                 notifyService.showError('User registration failed !', error);
             });
