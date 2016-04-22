@@ -4,11 +4,12 @@ app.controller('ProjectController.ViewProject', [
     '$scope',
     '$location',
     '$routeParams',
+    '$filter',
     'notifyService',
     'userService',
     'projectService',
     'issueService',
-    function ($scope, $location, $routeParams, notifyService, userService, projectService, issueService) {
+    function ($scope, $location, $routeParams, $filter, notifyService, userService, projectService, issueService) {
         userService.denyNotLoggedUser();
         const defaultSearch = 'defaultSearchShowAllItems';
         var allIssues = [],
@@ -122,25 +123,31 @@ app.controller('ProjectController.ViewProject', [
             $scope.priorities = [$scope.search.priority];
             $scope.search.status = {Id: defaultSearch, Name: '- Status -'};
             $scope.statuses = [$scope.search.status];
-            $scope.dueDates = [];
+            $scope.search.dueDate = {Id: defaultSearch, Name: '- Due Date -'};
+            $scope.dueDates = [$scope.search.dueDate];
             issuesToView.forEach(function (issue) {
                 addItemToCollection(issue.Assignee, $scope.assignees);
                 addItemToCollection(issue.Priority, $scope.priorities);
                 addItemToCollection(issue.Status, $scope.statuses);
+                var date=$filter('date')(issue.DueDate,"dd.MM.yyyy");
+                addItemToCollection({Id: issue.DueDate, Name: date}, $scope.dueDates);
             });
-
+            sortDueDateCollection();
         }
 
         function updateSearchData() {
             $scope.assignees = [$scope.assignees[0]];
             $scope.priorities = [$scope.priorities[0]];
             $scope.statuses = [$scope.statuses[0]];
-            $scope.dueDates = [];
+            $scope.dueDates = [$scope.dueDates[0]];
             issuesToView.forEach(function (issue) {
                 addItemToCollection(issue.Assignee, $scope.assignees);
                 addItemToCollection(issue.Priority, $scope.priorities);
                 addItemToCollection(issue.Status, $scope.statuses);
+                var date=$filter('date')(issue.DueDate,"dd.MM.yyyy");
+                addItemToCollection({Id: issue.DueDate, Name: date}, $scope.dueDates);
             });
+            sortDueDateCollection();
         }
 
         function addItemToCollection(newItem, items) {
@@ -153,6 +160,19 @@ app.controller('ProjectController.ViewProject', [
             if (!isItemExist) {
                 items.push(newItem);
             }
+        }
+
+        function sortDueDateCollection() {
+            var dateDeafult=$scope.dueDates[0];
+
+            var dueDates=$scope.dueDates.slice(1,$scope.dueDates.length).sort(function (a, b) {
+                return Date.parse(a.Id)<Date.parse(b.Id);
+            });
+
+            $scope.dueDates=[dateDeafult];
+            dueDates.forEach(function (dateObj) {
+                $scope.dueDates.push(dateObj);
+            });
         }
 
     }]);

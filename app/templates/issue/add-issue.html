@@ -9,10 +9,10 @@
                    required="required">
         </div>
         <!--<div class="form-group">-->
-            <!--<label for="inputAssignee">Assignee</label>-->
-            <!--<select id="inputAssignee" class="form-control" ng-model="issue.AssigneeId" required="required">-->
-                <!--<option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>-->
-            <!--</select>-->
+        <!--<label for="inputAssignee">Assignee</label>-->
+        <!--<select id="inputAssignee" class="form-control" ng-model="issue.AssigneeId" required="required">-->
+        <!--<option ng-repeat="user in users | orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>-->
+        <!--</select>-->
         <!--</div>-->
         <div class="form-group">
             <label for="inputAssignee">Assignee</label>
@@ -56,7 +56,8 @@
             <textarea id="inputDescription" class="form-control" placeholder="Description"
                       ng-model="issue.Description" required="required"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" ng-click="addIssue(issue)" ng-disabled="addIssueForm.$invalid">
+        <button type="submit" class="btn btn-primary center-block" ng-click="addIssue(issue)"
+                ng-disabled="addIssueForm.$invalid">
             Add Issue
         </button>
     </form>

@@ -51,7 +51,9 @@ app.controller('IssueController.EditIssue', [
             var issue = {};
             issue.Title = issueData.Title;
             issue.Description = issueData.Description;
-            issue.DueDate = issueData.DueDate;
+            var date=issueData.DueDate;
+            date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+            issue.DueDate = date;
             issue.AssigneeId = issueData.AssigneeId;
             issue.PriorityId = issueData.Priority.Id;
             var labels = issueData.Labels.trim().split(/\s*,\s*/);
@@ -59,6 +61,7 @@ app.controller('IssueController.EditIssue', [
             labels.forEach(function (label) {
                 issue.Labels.push({Name: label})
             });
+            console.log(issue.DueDate);
             issueService.updateIssue(issueId, issue).then(function (issue) {
                 notifyService.showInfo('Issue update is successfully !');
                 $location.path('/');

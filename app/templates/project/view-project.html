@@ -49,7 +49,9 @@
                                     </select>
                                 </th>
                                 <th class="col-lg-2">
-                                    Due Date
+                                    <select ng-model="search.dueDate" ng-change="applyFilters()"
+                                            ng-options="dueDate as dueDate.Name for dueDate in dueDates track by dueDate.Id">
+                                    </select>
                                 </th>
                                 <th class="col-lg-1">
                                     <select ng-model="search.priority" ng-change="applyFilters()"
@@ -88,7 +90,7 @@
                             Clear filters
                         </button>
                     </div>
-                    <div class=" col-lg-offset-1 ">
+                    <div class=" col-lg-6 ">
                         <div pagination ng-if="paginationIssue.maxSize>paginationIssue.pageSize"
                              ng-model="paginationIssue.startPage" items-per-page="paginationIssue.pageSize"
                              total-items="paginationIssue.maxSize" ng-change="selectIssuesToView()" max-size="9"
