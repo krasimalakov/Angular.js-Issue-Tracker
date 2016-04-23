@@ -1,4 +1,4 @@
-var app = angular.module('IssueTracker', ['ngRoute', 'ui.bootstrap.pagination'])
+var app = angular.module('IssueTracker', ['ngRoute', 'ui.bootstrap.pagination', 'angular-loading-bar'])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
 
     .config(['$routeProvider', function ($routeProvider) {
