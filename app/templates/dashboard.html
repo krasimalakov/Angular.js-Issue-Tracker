@@ -18,7 +18,13 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="issue in issues">
-                    <td><a href="#/issues/{{issue.Id}}">{{issue.Title}}</a></td>
+                    <td>
+                        <span class="css-truncate expandable">
+                            <span class="branch-ref css-truncate-target">
+                                <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                            </span>
+                        </span>
+                    </td>
                     <td>{{issue.Project.Name|keyFromText}}</td>
                     <td>{{issue.DueDate|date:"dd.MM.yyyy"}}</td>
                     <td>{{issue.Status.Name}}</td>
@@ -41,12 +47,20 @@
                 <tr>
                     <td>Key</td>
                     <td>Name</td>
+                    <td>Leader</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="project in projects">
                     <td>{{project.ProjectKey}}</td>
-                    <td><a href="#/projects/{{project.Id}}">{{project.Name}}</a></td>
+                    <td>
+                        <span class="css-truncate expandable">
+                            <span class="branch-ref css-truncate-target">
+                                <a style="width: 100px" href="#/projects/{{project.Id}}">{{project.Name}}</a>
+                            </span>
+                        </span>
+                    </td>
+                    <td>{{project.Lead.Username}}</a></td>
                 </tr>
 
                 </tbody>

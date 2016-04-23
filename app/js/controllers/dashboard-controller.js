@@ -3,11 +3,12 @@
 app.controller('DashboardController', [
     '$scope',
     '$location',
+    '$filter',
     'notifyService',
     'userService',
     'projectService',
     'issueService',
-    function ($scope, $location, notifyService, userService, projectService, issueService) {
+    function ($scope, $location, $filter, notifyService, userService, projectService, issueService) {
         userService.denyNotLoggedUser();
 
         $scope.paginationIssue = {
